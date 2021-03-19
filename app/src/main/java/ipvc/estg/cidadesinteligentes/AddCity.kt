@@ -1,4 +1,4 @@
-package ipvc.estg.room
+package ipvc.estg.cidadesinteligentes
 
 import android.app.Activity
 import android.content.Intent
@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import ipvc.estg.cidadesinteligentes.R
 
 class AddCity : AppCompatActivity() {
 
     private lateinit var cityText: EditText
     private lateinit var countryText: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,5 +38,6 @@ class AddCity : AppCompatActivity() {
     companion object {
         const val EXTRA_REPLY_CITY = "com.example.android.city"
         const val EXTRA_REPLY_COUNTRY = "com.example.android.country"
+
     }
 }

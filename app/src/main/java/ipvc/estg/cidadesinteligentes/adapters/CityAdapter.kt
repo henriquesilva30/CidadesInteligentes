@@ -1,4 +1,4 @@
-package ipvc.estg.room.adapters
+package ipvc.estg.cidadesinteligentes.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

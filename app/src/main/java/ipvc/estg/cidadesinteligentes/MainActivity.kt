@@ -13,8 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import ipvc.estg.room.AddCity
-import ipvc.estg.room.adapters.CityAdapter
+import ipvc.estg.cidadesinteligentes.adapters.CityAdapter
 import ipvc.estg.room.entities.City
 import ipvc.estg.room.viewModel.CityViewModel
 
@@ -22,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var cityViewModel: CityViewModel
     private val newWordActivityRequestCode = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             Toast.makeText(
-                    applicationContext,
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show()
+                applicationContext,
+                R.string.empty_not_saved,
+                Toast.LENGTH_LONG).show()
         }
     }
 
@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity() {
 
             else -> super.onOptionsItemSelected(item)
         }
-    }
 
+
+    }
 }
