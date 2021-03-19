@@ -4,32 +4,32 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import ipvc.estg.room.db.CityRepository
-import ipvc.estg.room.db.CityDB
-import ipvc.estg.room.entities.City
+import ipvc.estg.room.db.notasRepository
+import ipvc.estg.room.db.notasDB
+import ipvc.estg.room.entities.Notas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CityViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: CityRepository
+    private val repository: notasRepository
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allCities: LiveData<List<City>>
+    val allCities: LiveData<List<Notas>>
 
     init {
-        val citiesDao = CityDB.getDatabase(application, viewModelScope).cityDao()
-        repository = CityRepository(citiesDao)
+        val citiesDao = notasDB.getDatabase(application, viewModelScope).cityDao()
+        repository = notasRepository(citiesDao)
         allCities = repository.allCities
     }
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(city: City) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(city)
+    fun insert(notas: Notas) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(notas)
     }
 
     // delete all
@@ -42,16 +42,16 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteByCity(city)
     }
 
-    fun getCitiesByCountry(country: String): LiveData<List<City>> {
+    fun getCitiesByCountry(country: String): LiveData<List<Notas>> {
         return repository.getCitiesByCountry(country)
     }
 
-    fun getCountryFromCity(city: String): LiveData<City> {
+    fun getCountryFromCity(city: String): LiveData<Notas> {
         return repository.getCountryFromCity(city)
     }
 
-    fun updateCity(city: City) = viewModelScope.launch {
-        repository.updateCity(city)
+    fun updateCity(notas: Notas) = viewModelScope.launch {
+        repository.updateCity(notas)
     }
 
     fun updateCountryFromCity(city: String, country: String) = viewModelScope.launch {

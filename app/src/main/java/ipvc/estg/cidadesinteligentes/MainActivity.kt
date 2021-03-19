@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import ipvc.estg.cidadesinteligentes.adapters.CityAdapter
-import ipvc.estg.room.entities.City
+import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
+import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.CityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = CityAdapter(this)
+        val adapter = notasAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         //Fab
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, AddCity::class.java)
+            val intent = Intent(this@MainActivity, notasPessoais::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
 
@@ -53,11 +53,11 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            val pcity = data?.getStringExtra(AddCity.EXTRA_REPLY_CITY)
-            val pcountry = data?.getStringExtra(AddCity.EXTRA_REPLY_COUNTRY)
+            val pcity = data?.getStringExtra(notasPessoais.EXTRA_REPLY_CITY)
+            val pcountry = data?.getStringExtra(notasPessoais.EXTRA_REPLY_COUNTRY)
 
             if (pcity!= null && pcountry != null) {
-                val city = City(city = pcity, country = pcountry)
+                val city = Notas(city = pcity, country = pcountry)
                 cityViewModel.insert(city)
             }
 
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
                 // recycler view
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                val adapter = CityAdapter(this)
+                val adapter = notasAdapter(this)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 
                 // recycler view
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                val adapter = CityAdapter(this)
+                val adapter = notasAdapter(this)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.alterar -> {
-                val city = City(id = 1, city = "xxx", country = "xxx")
+                val city = Notas(id = 1, city = "xxx", country = "xxx")
                 cityViewModel.updateCity(city)
                 true
             }

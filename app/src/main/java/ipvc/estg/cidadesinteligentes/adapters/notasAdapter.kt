@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.estg.cidadesinteligentes.R
-import ipvc.estg.room.entities.City
+import ipvc.estg.room.entities.Notas
 
-class CityAdapter internal constructor(
+class notasAdapter internal constructor(
     context: Context
-) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
+) : RecyclerView.Adapter<notasAdapter.CityViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var cities = emptyList<City>() // Cached copy of cities
+    private var cities = emptyList<Notas>() // Cached copy of cities
 
     class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cityItemView: TextView = itemView.findViewById(R.id.textView)
@@ -30,8 +30,8 @@ class CityAdapter internal constructor(
         holder.cityItemView.text = current.id.toString() + " - " + current.city + "-" + current.country
     }
 
-    internal fun setCities(cities: List<City>) {
-        this.cities = cities
+    internal fun setCities(notas: List<Notas>) {
+        this.cities = notas
         notifyDataSetChanged()
     }
 

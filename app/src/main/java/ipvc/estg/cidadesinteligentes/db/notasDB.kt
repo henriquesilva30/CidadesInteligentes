@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ipvc.estg.room.dao.CityDao
-import ipvc.estg.room.entities.City
+import ipvc.estg.room.dao.notasDao
+import ipvc.estg.room.entities.Notas
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -15,10 +15,10 @@ import kotlinx.coroutines.launch
 // Note: When you modify the database schema, you'll need to update the version number and define a migration strategy
 //For a sample, a destroy and re-create strategy can be sufficient. But, for a real app, you must implement a migration strategy.
 
-@Database(entities = arrayOf(City::class), version = 8, exportSchema = false)
-public abstract class CityDB : RoomDatabase() {
+@Database(entities = arrayOf(Notas::class), version = 8, exportSchema = false)
+public abstract class notasDB : RoomDatabase() {
 
-    abstract fun cityDao(): CityDao
+    abstract fun cityDao(): notasDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
@@ -34,11 +34,11 @@ public abstract class CityDB : RoomDatabase() {
                     cityDao.deleteAll()
 
                     // Add sample cities.
-                    var city = City(1, "Viana do Castelo", "Portugal")
+                    var city = Notas(1, "Viana do Castelo", "Portugal")
                     cityDao.insert(city)
-                    city = City(2, "Porto", "Portugal")
+                    city = Notas(2, "Porto", "Portugal")
                     cityDao.insert(city)
-                    city = City(3, "Aveiro", "Portugal")
+                    city = Notas(3, "Aveiro", "Portugal")
                     cityDao.insert(city)
 
                 }
@@ -50,9 +50,9 @@ public abstract class CityDB : RoomDatabase() {
         // Singleton prevents multiple instances of database opening at the
         // same time.
         @Volatile
-        private var INSTANCE: CityDB? = null
+        private var INSTANCE: notasDB? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): CityDB {
+        fun getDatabase(context: Context, scope: CoroutineScope): notasDB {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -60,7 +60,7 @@ public abstract class CityDB : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    CityDB::class.java,
+                    notasDB::class.java,
                     "cities_database"
                 )
                 //estratégia de destruição

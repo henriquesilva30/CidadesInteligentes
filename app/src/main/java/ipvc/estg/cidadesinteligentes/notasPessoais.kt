@@ -8,7 +8,7 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 
-class AddCity : AppCompatActivity() {
+class notasPessoais : AppCompatActivity() {
 
     private lateinit var cityText: EditText
     private lateinit var countryText: EditText
@@ -16,7 +16,7 @@ class AddCity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_city)
+        setContentView(R.layout.activity_notas_pessoais)
 
         cityText = findViewById(R.id.city)
         countryText = findViewById(R.id.country)

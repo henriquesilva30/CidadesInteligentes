@@ -2,25 +2,25 @@ package ipvc.estg.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ipvc.estg.room.entities.City
+import ipvc.estg.room.entities.Notas
 
 @Dao
-interface CityDao {
+interface notasDao {
 
     @Query("SELECT * from city_table ORDER BY city ASC")
-    fun getAllCities(): LiveData<List<City>>
+    fun getAllCities(): LiveData<List<Notas>>
 
     @Query("SELECT * FROM city_table WHERE country == :country")
-    fun getCitiesByCountry(country: String): LiveData<List<City>>
+    fun getCitiesByCountry(country: String): LiveData<List<Notas>>
 
     @Query("SELECT * FROM city_table WHERE city == :city")
-    fun getCountryFromCity(city: String): LiveData<City>
+    fun getCountryFromCity(city: String): LiveData<Notas>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(city: City)
+    suspend fun insert(notas: Notas)
 
     @Update
-    suspend fun updateCity(city: City)
+    suspend fun updateCity(notas: Notas)
 
     @Query("DELETE FROM city_table")
     suspend fun deleteAll()
