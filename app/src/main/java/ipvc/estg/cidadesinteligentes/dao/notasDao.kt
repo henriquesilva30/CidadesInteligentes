@@ -8,7 +8,7 @@ import ipvc.estg.room.entities.Notas
 interface notasDao {
 
     @Query("SELECT * from notas_table ORDER BY city ASC")
-    fun getAllCities(): LiveData<List<Notas>>
+    fun getAllNotas(): LiveData<List<Notas>>
 
     @Query("SELECT * FROM notas_table WHERE country == :country")
     fun getCitiesByCountry(country: String): LiveData<List<Notas>>

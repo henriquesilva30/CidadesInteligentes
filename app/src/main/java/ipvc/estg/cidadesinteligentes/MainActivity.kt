@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
-import ipvc.estg.room.viewModel.CityViewModel
+import ipvc.estg.room.viewModel.NotasViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var cityViewModel: CityViewModel
+    private lateinit var notasViewModel: NotasViewModel
     private val newWordActivityRequestCode = 1
 
 
@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // view model
-        cityViewModel = ViewModelProvider(this).get(CityViewModel::class.java)
-        cityViewModel.allCities.observe(this, Observer { cities ->
+        notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
+        notasViewModel.allNotas.observe(this, Observer { notas ->
             // Update the cached copy of the words in the adapter.
-            cities?.let { adapter.setCities(it) }
+            notas?.let { adapter.setNotas(it) }
         })
 
         //Fab
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
             if (pcity!= null && pcountry != null) {
                 val city = Notas(city = pcity, country = pcountry)
-                cityViewModel.insert(city)
+                notasViewModel.insert(city)
             }
 
         } else {
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.apagartudo -> {
-                cityViewModel.deleteAll()
+                notasViewModel.deleteAll()
                 true
             }
 
@@ -93,10 +93,10 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this)
 
                 // view model
-                cityViewModel = ViewModelProvider(this).get(CityViewModel::class.java)
-                cityViewModel.getCitiesByCountry("Portugal").observe(this, Observer { cities ->
+                notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
+                notasViewModel.getCitiesByCountry("Portugal").observe(this, Observer { cities ->
                     // Update the cached copy of the words in the adapter.
-                    cities?.let { adapter.setCities(it) }
+                    cities?.let { adapter.setNotas(it) }
                 })
 
                 true
@@ -111,10 +111,10 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this)
 
                 // view model
-                cityViewModel = ViewModelProvider(this).get(CityViewModel::class.java)
-                cityViewModel.allCities.observe(this, Observer { cities ->
+                notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
+                notasViewModel.allNotas.observe(this, Observer { cities ->
                     // Update the cached copy of the words in the adapter.
-                    cities?.let { adapter.setCities(it) }
+                    cities?.let { adapter.setNotas(it) }
                 })
 
 
@@ -122,26 +122,26 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.getCountryFromAveiro -> {
-                cityViewModel = ViewModelProvider(this).get(CityViewModel::class.java)
-                cityViewModel.getCountryFromCity("Aveiro").observe(this, Observer { city ->
+                notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
+                notasViewModel.getCountryFromCity("Aveiro").observe(this, Observer { city ->
                     Toast.makeText(this, city.country, Toast.LENGTH_SHORT).show()
                 })
                 true
             }
 
             R.id.apagarAveiro -> {
-                cityViewModel.deleteByCity("Aveiro")
+                notasViewModel.deleteByCity("Aveiro")
                 true
             }
 
             R.id.alterar -> {
                 val city = Notas(id = 1, city = "xxx", country = "xxx")
-                cityViewModel.updateCity(city)
+                notasViewModel.updateCity(city)
                 true
             }
 
             R.id.alteraraveiro -> {
-                cityViewModel.updateCountryFromCity("Aveiro", "Japão")
+                notasViewModel.updateCountryFromCity("Aveiro", "Japão")
                 true
             }
 

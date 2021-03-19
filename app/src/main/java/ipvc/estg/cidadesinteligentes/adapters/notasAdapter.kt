@@ -11,26 +11,26 @@ import ipvc.estg.room.entities.Notas
 
 class notasAdapter internal constructor(
     context: Context
-) : RecyclerView.Adapter<notasAdapter.CityViewHolder>() {
+) : RecyclerView.Adapter<notasAdapter.NotasViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notas = emptyList<Notas>() // Cached copy of cities
 
-    class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cityItemView: TextView = itemView.findViewById(R.id.textView)
+    class NotasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val notasItemView: TextView = itemView.findViewById(R.id.textView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotasViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
-        return CityViewHolder(itemView)
+        return NotasViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NotasViewHolder, position: Int) {
         val current = notas[position]
-        holder.cityItemView.text = current.id.toString() + " - " + current.city + "-" + current.country
+        holder.notasItemView.text = current.id.toString() + " - " + current.city + "-" + current.country
     }
 
-    internal fun setCities(notas: List<Notas>) {
+    internal fun setNotas(notas: List<Notas>) {
         this.notas = notas
         notifyDataSetChanged()
     }

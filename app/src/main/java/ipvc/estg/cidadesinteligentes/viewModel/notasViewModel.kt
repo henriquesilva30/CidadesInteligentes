@@ -10,19 +10,19 @@ import ipvc.estg.room.entities.Notas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CityViewModel(application: Application) : AndroidViewModel(application) {
+class NotasViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: notasRepository
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allCities: LiveData<List<Notas>>
+    val allNotas: LiveData<List<Notas>>
 
     init {
         val citiesDao = notasDB.getDatabase(application, viewModelScope).notasDao()
         repository = notasRepository(citiesDao)
-        allCities = repository.allCities
+        allNotas = repository.allNotas
     }
 
     /**
