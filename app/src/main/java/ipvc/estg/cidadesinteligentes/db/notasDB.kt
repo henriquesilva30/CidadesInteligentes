@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 @Database(entities = arrayOf(Notas::class), version = 8, exportSchema = false)
 public abstract class notasDB : RoomDatabase() {
 
-    abstract fun cityDao(): notasDao
+    abstract fun notasDao(): notasDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
@@ -28,18 +28,18 @@ public abstract class notasDB : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var cityDao = database.cityDao()
+                    var notasDao = database.notasDao()
 
                     // Delete all content here.
-                    cityDao.deleteAll()
+                    notasDao.deleteAll()
 
                     // Add sample cities.
-                    var city = Notas(1, "Viana do Castelo", "Portugal")
-                    cityDao.insert(city)
-                    city = Notas(2, "Porto", "Portugal")
-                    cityDao.insert(city)
-                    city = Notas(3, "Aveiro", "Portugal")
-                    cityDao.insert(city)
+                    var notas = Notas(1, "Viana do Castelo", "Portugal")
+                    notasDao.insert(notas)
+                    notas = Notas(2, "Porto", "Portugal")
+                    notasDao.insert(notas)
+                    notas = Notas(3, "Aveiro", "Portugal")
+                    notasDao.insert(notas)
 
                 }
             }

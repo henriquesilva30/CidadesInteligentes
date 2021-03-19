@@ -20,7 +20,7 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
     val allCities: LiveData<List<Notas>>
 
     init {
-        val citiesDao = notasDB.getDatabase(application, viewModelScope).cityDao()
+        val citiesDao = notasDB.getDatabase(application, viewModelScope).notasDao()
         repository = notasRepository(citiesDao)
         allCities = repository.allCities
     }
