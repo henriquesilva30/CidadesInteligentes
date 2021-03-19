@@ -16,8 +16,8 @@ class notasRepository(private val notasDao: notasDao) {
         return notasDao.getCitiesByCountry(country)
     }
 
-    fun getCountryFromCity(city: String): LiveData<Notas> {
-        return notasDao.getCountryFromCity(city)
+    fun getCountryFromCity(notas: String): LiveData<Notas> {
+        return notasDao.getCountryFromCity(notas)
     }
 
     suspend fun insert(notas: Notas) {
@@ -28,15 +28,15 @@ class notasRepository(private val notasDao: notasDao) {
         notasDao.deleteAll()
     }
 
-    suspend fun deleteByCity(city: String){
-        notasDao.deleteByCity(city)
+    suspend fun deleteByCity(notas: String){
+        notasDao.deleteByCity(notas)
     }
 
     suspend fun updateCity(notas: Notas) {
         notasDao.updateCity(notas)
     }
 
-    suspend fun updateCountryFromCity(city: String, country: String){
-        notasDao.updateCountryFromCity(city, country)
+    suspend fun updateCountryFromCity(notas: String, country: String){
+        notasDao.updateCountryFromCity(notas, country)
     }
 }

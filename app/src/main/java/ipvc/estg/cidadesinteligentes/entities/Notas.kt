@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "city_table")
+@Entity(tableName = "notas_table")
 
 class Notas(
     // Int? = null so when creating instance id has not to be passed as argument

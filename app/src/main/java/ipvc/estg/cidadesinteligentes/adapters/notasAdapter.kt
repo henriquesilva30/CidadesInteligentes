@@ -14,7 +14,7 @@ class notasAdapter internal constructor(
 ) : RecyclerView.Adapter<notasAdapter.CityViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var cities = emptyList<Notas>() // Cached copy of cities
+    private var notas = emptyList<Notas>() // Cached copy of cities
 
     class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cityItemView: TextView = itemView.findViewById(R.id.textView)
@@ -26,14 +26,14 @@ class notasAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-        val current = cities[position]
+        val current = notas[position]
         holder.cityItemView.text = current.id.toString() + " - " + current.city + "-" + current.country
     }
 
     internal fun setCities(notas: List<Notas>) {
-        this.cities = notas
+        this.notas = notas
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = cities.size
+    override fun getItemCount() = notas.size
 }

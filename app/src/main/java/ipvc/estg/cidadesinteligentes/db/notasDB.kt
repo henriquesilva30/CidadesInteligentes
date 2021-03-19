@@ -61,7 +61,7 @@ public abstract class notasDB : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     notasDB::class.java,
-                    "cities_database"
+                    "notas_database"
                 )
                 //estratégia de destruição
                 .fallbackToDestructiveMigration()
