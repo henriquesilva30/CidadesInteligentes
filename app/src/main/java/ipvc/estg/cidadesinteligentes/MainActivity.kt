@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
             val pcountry = data?.getStringExtra(notasPessoais.EXTRA_REPLY_COUNTRY)
 
             if (pcity!= null && pcountry != null) {
-                val city = Notas(city = pcity, country = pcountry)
-                notasViewModel.insert(city)
+                val notas = Notas(city = pcity, country = pcountry)
+                notasViewModel.insert(notas)
             }
 
         } else {
@@ -94,9 +94,9 @@ class MainActivity : AppCompatActivity() {
 
                 // view model
                 notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
-                notasViewModel.getCitiesByCountry("Portugal").observe(this, Observer { cities ->
+                notasViewModel.getCitiesByCountry("Portugal").observe(this, Observer { notas ->
                     // Update the cached copy of the words in the adapter.
-                    cities?.let { adapter.setNotas(it) }
+                    notas?.let { adapter.setNotas(it) }
                 })
 
                 true
@@ -112,9 +112,9 @@ class MainActivity : AppCompatActivity() {
 
                 // view model
                 notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
-                notasViewModel.allNotas.observe(this, Observer { cities ->
+                notasViewModel.allNotas.observe(this, Observer { notas ->
                     // Update the cached copy of the words in the adapter.
-                    cities?.let { adapter.setNotas(it) }
+                    notas?.let { adapter.setNotas(it) }
                 })
 
 
@@ -123,8 +123,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.getCountryFromAveiro -> {
                 notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
-                notasViewModel.getCountryFromCity("Aveiro").observe(this, Observer { city ->
-                    Toast.makeText(this, city.country, Toast.LENGTH_SHORT).show()
+                notasViewModel.getCountryFromCity("Aveiro").observe(this, Observer { notas ->
+                    Toast.makeText(this, notas.country, Toast.LENGTH_SHORT).show()
                 })
                 true
             }
@@ -135,8 +135,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.alterar -> {
-                val city = Notas(id = 1, city = "xxx", country = "xxx")
-                notasViewModel.updateCity(city)
+                val notas = Notas(id = 1, city = "xxx", country = "xxx")
+                notasViewModel.updateCity(notas)
                 true
             }
 
