@@ -20,8 +20,8 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
     val allNotas: LiveData<List<Notas>>
 
     init {
-        val citiesDao = notasDB.getDatabase(application, viewModelScope).notasDao()
-        repository = notasRepository(citiesDao)
+        val notasDao = notasDB.getDatabase(application, viewModelScope).notasDao()
+        repository = notasRepository(notasDao)
         allNotas = repository.allNotas
     }
 
@@ -39,22 +39,20 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
 
     // delete by city
     fun deleteByCity(city: String) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteByCity(city)
+        repository.deleteByNotas(city)
     }
 
-    fun getCitiesByCountry(country: String): LiveData<List<Notas>> {
-        return repository.getCitiesByCountry(country)
+    fun getNotasByLocalizacao(local: String): LiveData<List<Notas>> {
+        return repository.getCitiesByCountry(local)
     }
 
     fun getCountryFromCity(city: String): LiveData<Notas> {
         return repository.getCountryFromCity(city)
     }
 
-    fun updateCity(notas: Notas) = viewModelScope.launch {
-        repository.updateCity(notas)
+    fun updateNotas(notas: Notas) = viewModelScope.launch {
+        repository.updateNotas(notas)
     }
 
-    fun updateCountryFromCity(city: String, country: String) = viewModelScope.launch {
-        repository.updateCountryFromCity(city, country)
-    }
+
 }

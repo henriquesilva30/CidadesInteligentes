@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">room</string>
-    <string name="add_city">Add city</string>
-    <string name="empty_not_saved">Cidade vazia: não inserida</string>
-    <string name="insertcity">Insira Cidade</string>
-    <string name="insertcountry">Insira País</string>
+    <string name="app_name">Cidades Inteligentes</string>
+    <string name="add_nota">Adicionar nota</string>
+    <string name="empty_not_saved">Descrição por preencher</string>
+    <string name="descri_o">Descrição</string>
+    <string name="guardar">Guardar</string>
 </resources>

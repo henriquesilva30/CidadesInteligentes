@@ -34,12 +34,17 @@ public abstract class notasDB : RoomDatabase() {
                     notasDao.deleteAll()
 
                     // Add sample cities.
-                    var notas = Notas(1, "Viana do Castelo", "Portugal")
+                    var notas = Notas(1,  "Estudar","20/03/2021","18:16","Rua Eurico Santos nº4")
                     notasDao.insert(notas)
-                    notas = Notas(2, "Porto", "Portugal")
+                    notas = Notas(2, "Porto","20/03/2021","18:16","Praça Adelino Almeira")
                     notasDao.insert(notas)
-                    notas = Notas(3, "Aveiro", "Portugal")
+                    notas = Notas(3, "Aveiro","20/03/2021","18:16","Senhor do Socorro")
                     notasDao.insert(notas)
+                    notas = Notas(4, "Portugal","13/03/2021","18:17","Rua Comendador Araujo")
+                    notasDao.insert(notas)
+                    notas = Notas(5, "Tarefas","20/03/2021","18:16","Rua da Bonança nº108")
+                    notasDao.insert(notas)
+
 
                 }
             }
