@@ -7,27 +7,25 @@ import ipvc.estg.room.entities.Notas
 @Dao
 interface notasDao {
 
-    @Query("SELECT * from notas_table ORDER BY city ASC")
+    @Query("SELECT * from notas_table ORDER BY id ASC")
     fun getAllNotas(): LiveData<List<Notas>>
 
-    @Query("SELECT * FROM notas_table WHERE country == :country")
-    fun getCitiesByCountry(country: String): LiveData<List<Notas>>
+    @Query("SELECT * FROM notas_table WHERE descric == :descric")
+    fun getNotasByDescric(descric: String): LiveData<List<Notas>>
 
-    @Query("SELECT * FROM notas_table WHERE city == :city")
-    fun getCountryFromCity(city: String): LiveData<Notas>
+    @Query("SELECT * FROM notas_table WHERE data == :data")
+    fun getNotasFromData(data: String): LiveData<Notas>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(notas: Notas)
 
     @Update
-    suspend fun updateCity(notas: Notas)
+    suspend fun updateNotas(notas: Notas)
 
     @Query("DELETE FROM notas_table")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM notas_table where city == :city")
-    suspend fun deleteByCity(city: String)
+    @Query("DELETE FROM notas_table where descric == :descric")
+    suspend fun deleteByNotas(descric: String)
 
-    @Query("UPDATE notas_table SET country=:country WHERE city == :city")
-    suspend fun updateCountryFromCity(city: String, country: String)
 }

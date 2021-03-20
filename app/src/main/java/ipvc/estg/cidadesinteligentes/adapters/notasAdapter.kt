@@ -17,7 +17,7 @@ class notasAdapter internal constructor(
     private var notas = emptyList<Notas>() // Cached copy of cities
 
     class NotasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val notasItemView: TextView = itemView.findViewById(R.id.textView)
+        val notasItemView: TextView = itemView.findViewById(R.id.descricao)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotasViewHolder {
@@ -27,7 +27,7 @@ class notasAdapter internal constructor(
 
     override fun onBindViewHolder(holder: NotasViewHolder, position: Int) {
         val current = notas[position]
-        holder.notasItemView.text = current.id.toString() + " - " + current.city + "-" + current.country
+        holder.notasItemView.text = current.descric + ", "+current.local+", "+ current.data+", "+current.hora
     }
 
     internal fun setNotas(notas: List<Notas>) {
