@@ -14,7 +14,7 @@ class notasPessoais : AppCompatActivity() {
     private lateinit var descText: EditText
     private lateinit var dataText: TextView
     private lateinit var horaText: TextView
-    private lateinit var localText: TextView
+    private lateinit var localText: EditText
 
 
 
@@ -23,9 +23,9 @@ class notasPessoais : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notas_pessoais)
 
-        descText = findViewById(R.id.descricao)
+        descText = findViewById(R.id.add_descricao)
         dataText = findViewById(R.id.data)
-        localText = findViewById(R.id.localizao)
+        localText = findViewById(R.id.add_localizacao)
         horaText = findViewById(R.id.hora)
 
 

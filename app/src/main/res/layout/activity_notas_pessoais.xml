@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="20/03/2021 Sexta-feira"
-        android:textSize="20dp"
+        android:textSize="10dp"
         android:textColor="#000000"/>
     <TextView
         android:id="@+id/hora"
@@ -25,19 +25,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="17:37"
-        android:textSize="20dp"
+        android:textSize="10dp"
         android:textColor="#000000"/>
 
 
+        <EditText
+            android:id="@+id/add_localizacao"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/localiza_o"
+            android:inputType="textAutoComplete"
+            android:textSize="16dp"
+            android:layout_below="@id/data"/>
+
     <EditText
-        android:layout_marginTop="@dimen/min_height"
-        android:id="@+id/descricao"
+        android:id="@+id/add_descricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/descri_o"
         android:inputType="textAutoComplete"
-        android:textSize="20dp"
-        android:layout_below="@id/data"/>
+        android:textSize="16dp"
+        android:layout_below="@id/add_localizacao"/>
 </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,6 +62,7 @@
             android:background="#000000"
             android:text="@string/guardar"
             android:textColor="#ffffff"
+
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
