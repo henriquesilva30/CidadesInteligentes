@@ -10,11 +10,6 @@ interface notasDao {
     @Query("SELECT * from notas_table ORDER BY id ASC")
     fun getAllNotas(): LiveData<List<Notas>>
 
-    @Query("SELECT * FROM notas_table WHERE descric == :descric")
-    fun getNotasByDescric(descric: String): LiveData<List<Notas>>
-
-    @Query("SELECT * FROM notas_table WHERE data == :data")
-    fun getNotasFromData(data: String): LiveData<Notas>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(notas: Notas)

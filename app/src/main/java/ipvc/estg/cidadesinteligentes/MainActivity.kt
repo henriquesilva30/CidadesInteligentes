@@ -92,67 +92,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.cidadesPortugal -> {
-
-                // recycler view
-                val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                val adapter = notasAdapter(this)
-                recyclerView.adapter = adapter
-                recyclerView.layoutManager = LinearLayoutManager(this)
-
-                // view model
-                notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
-                notasViewModel.getNotasByLocalizacao("Portugal").observe(this, Observer { notas ->
-                    // Update the cached copy of the words in the adapter.
-                    notas?.let { adapter.setNotas(it) }
-                })
-
-                true
-            }
-
-            R.id.todasCidades -> {
-
-                // recycler view
-                val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                val adapter = notasAdapter(this)
-                recyclerView.adapter = adapter
-                recyclerView.layoutManager = LinearLayoutManager(this)
-
-                // view model
-                notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
-                notasViewModel.allNotas.observe(this, Observer { notas ->
-                    // Update the cached copy of the words in the adapter.
-                    notas?.let { adapter.setNotas(it) }
-                })
-
-
-                true
-            }
-
-            R.id.getCountryFromAveiro -> {
-                notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
-                notasViewModel.getCountryFromCity("Aveiro").observe(this, Observer { notas ->
-                    Toast.makeText(this, notas.descric, Toast.LENGTH_SHORT).show()
-                })
-                true
-            }
-
-            R.id.apagarAveiro -> {
-                notasViewModel.deleteByCity("Aveiro")
-                true
-            }
-
-            R.id.alterar -> {
-                val notas = Notas(id = 1, descric = "xxx", data ="xxxx", hora = "hora", local = "xxx" )
-                notasViewModel.updateNotas(notas)
-                true
-            }
-
-
-
-            else -> super.onOptionsItemSelected(item)
-        }
-
-
+        else -> super.onOptionsItemSelected(item)
+    }
     }
 }
+
+

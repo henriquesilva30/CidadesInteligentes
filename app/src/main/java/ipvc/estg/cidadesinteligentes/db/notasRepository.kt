@@ -12,13 +12,6 @@ class notasRepository(private val notasDao: notasDao) {
     // Observed LiveData will notify the observer when the data has changed.
     val allNotas: LiveData<List<Notas>> = notasDao.getAllNotas()
 
-    fun getCitiesByCountry(country: String): LiveData<List<Notas>> {
-        return notasDao.getNotasByDescric(country)
-    }
-
-    fun getCountryFromCity(notas: String): LiveData<Notas> {
-        return notasDao.getNotasFromData(notas)
-    }
 
     suspend fun insert(notas: Notas) {
         notasDao.insert(notas)
