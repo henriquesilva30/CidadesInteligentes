@@ -30,7 +30,7 @@ class notasPessoais : AppCompatActivity() {
         localText = findViewById(R.id.add_localizacao)
         horaText = findViewById(R.id.hora)
 
-
+        //test commit branch
 
 
         val button = findViewById<Button>(R.id.button_save)
