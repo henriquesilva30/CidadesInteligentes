@@ -20,7 +20,7 @@ interface notasDao {
     @Query("DELETE FROM notas_table")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM notas_table where descric == :descric")
-    suspend fun deleteByNotas(descric: String)
+    @Query("DELETE FROM notas_table where id == :id")
+    suspend fun deleteByNotas(id: Int?)
 
 }

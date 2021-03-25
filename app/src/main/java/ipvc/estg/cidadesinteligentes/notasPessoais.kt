@@ -54,22 +54,31 @@ class notasPessoais : AppCompatActivity() {
 
 
             val replyIntent = Intent()
-            if (TextUtils.isEmpty(descText.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
+
+            if(TextUtils.isEmpty((descText.text)) || TextUtils.isEmpty((localText.text))){
+
+                if(TextUtils.isEmpty((descText.text)) && !TextUtils.isEmpty((localText.text))){
+                    descText.error = getString(R.string.aviso_desc)
+                }
+                if(!TextUtils.isEmpty((descText.text)) && TextUtils.isEmpty((localText.text))){
+                    localText.error = getString(R.string.aviso_local)
+                }
+                if(TextUtils.isEmpty((descText.text)) && TextUtils.isEmpty((localText.text))){
+                    descText.error = getString(R.string.aviso_desc)
+                    localText.error = getString(R.string.aviso_local)
+                }
             } else {
                 replyIntent.putExtra(EXTRA_REPLY_DESCRIC, descText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_DATA, dataText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_HORA, horaText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_LOCAL, localText.text.toString())
                 setResult(Activity.RESULT_OK, replyIntent)
+                finish()
             }
-            finish()
         }
     }
 
     fun updateNote(view: View){
-        descText = findViewById(R.id.add_descricao)
-        localText = findViewById(R.id.add_localizacao)
 
         var message = intent.getIntExtra(ID, 0)
         val replyIntent = Intent()
