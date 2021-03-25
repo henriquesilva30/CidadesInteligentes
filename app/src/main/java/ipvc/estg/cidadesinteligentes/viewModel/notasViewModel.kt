@@ -42,13 +42,7 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteByNotas(city)
     }
 
-    fun getNotasByLocalizacao(local: String): LiveData<List<Notas>> {
-        return repository.getCitiesByCountry(local)
-    }
 
-    fun getCountryFromCity(city: String): LiveData<Notas> {
-        return repository.getCountryFromCity(city)
-    }
 
     fun updateNotas(notas: Notas) = viewModelScope.launch {
         repository.updateNotas(notas)

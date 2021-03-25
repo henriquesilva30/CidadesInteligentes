@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:background="#000000"
             android:text="@string/guardar"
+            android:onClick="updateNote"
             android:textColor="#ffffff"
 
             tools:ignore="MissingConstraints" />

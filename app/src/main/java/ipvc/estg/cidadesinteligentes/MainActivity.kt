@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import ipvc.estg.cidadesinteligentes.adapters.DESCRICAO
+import ipvc.estg.cidadesinteligentes.adapters.LOCAL
 import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
@@ -22,6 +26,8 @@ const val PARAM1_DESC ="desc"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var desc: EditText
+    private lateinit var local: EditText
     private lateinit var notasViewModel: NotasViewModel
     private val newWordActivityRequestCode = 1
 
@@ -29,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
@@ -49,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, notasPessoais::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
+
 
     }
 
@@ -83,6 +93,8 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.menu, menu)
         return true
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
