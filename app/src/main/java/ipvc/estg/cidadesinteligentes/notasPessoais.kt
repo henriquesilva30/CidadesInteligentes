@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
+
+
 class notasPessoais : AppCompatActivity() {
 
     private lateinit var descText: EditText
@@ -27,6 +29,8 @@ class notasPessoais : AppCompatActivity() {
         dataText = findViewById(R.id.data)
         localText = findViewById(R.id.add_localizacao)
         horaText = findViewById(R.id.hora)
+
+
 
 
         val button = findViewById<Button>(R.id.button_save)

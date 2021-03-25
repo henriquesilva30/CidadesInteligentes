@@ -17,6 +17,9 @@ import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
 
+const val PARAM1_DESC ="desc"
+
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var notasViewModel: NotasViewModel
