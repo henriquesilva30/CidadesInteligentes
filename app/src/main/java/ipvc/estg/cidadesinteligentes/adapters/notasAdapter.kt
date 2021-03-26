@@ -83,6 +83,5 @@ class notasAdapter internal constructor(
         notifyDataSetChanged()
     }
 
-    //teste commit
     override fun getItemCount() = notas.size
 }
