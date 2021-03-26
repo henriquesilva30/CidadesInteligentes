@@ -37,9 +37,9 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
-    // delete by city
-    fun deleteByNotas(id: Int?) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteByNotas(id)
+    // delete by notas
+    fun delete(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(id)
     }
 
 

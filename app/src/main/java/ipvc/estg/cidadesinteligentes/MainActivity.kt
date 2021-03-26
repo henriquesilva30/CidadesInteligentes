@@ -16,17 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ipvc.estg.cidadesinteligentes.adapters.DESCRICAO
+import ipvc.estg.cidadesinteligentes.adapters.ID
 import ipvc.estg.cidadesinteligentes.adapters.LOCAL
 import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
 
-const val PARAM1_DESC ="desc"
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var desc: EditText
+    private lateinit var id: EditText
     private lateinit var local: EditText
     private lateinit var notasViewModel: NotasViewModel
     private val newWordActivityRequestCode = 1
@@ -87,9 +88,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun delete(id : Int?) {
-        notasViewModel.deleteByNotas(id)
+    fun delete(id : Int) {
+        var message = intent.getIntExtra(ID, 0)
+
+        notasViewModel.delete(message)
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

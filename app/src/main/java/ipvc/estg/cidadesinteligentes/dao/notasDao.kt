@@ -21,6 +21,6 @@ interface notasDao {
     suspend fun deleteAll()
 
     @Query("DELETE FROM notas_table where id == :id")
-    suspend fun deleteByNotas(id: Int?)
+    suspend fun delete(id: Int)
 
 }

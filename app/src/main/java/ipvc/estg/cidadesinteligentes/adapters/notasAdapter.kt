@@ -28,7 +28,6 @@ class notasAdapter internal constructor(
         val notasItemView: TextView = itemView.findViewById(R.id.descricao)
         val local: TextView = itemView.findViewById(R.id.localizacao)
         val edit : LinearLayout = itemView.findViewById(R.id.layoutEdit)
-
         val delete : LinearLayout = itemView.findViewById(R.id.layoutRemove)
 
     }

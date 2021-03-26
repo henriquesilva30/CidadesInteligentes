@@ -34,6 +34,7 @@ class notasPessoais : AppCompatActivity() {
 
         val editLocal = intent.getStringExtra(LOCAL)
         val editDescricao = intent.getStringExtra(DESCRICAO)
+        var message = intent.getStringExtra(ID)
 
         findViewById<EditText>(R.id.add_descricao).setText(editDescricao)
         findViewById<EditText>(R.id.add_localizacao).setText(editLocal)
@@ -52,6 +53,7 @@ class notasPessoais : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
 
+            var message = intent.getIntExtra(ID, 0)
 
             val replyIntent = Intent()
 
@@ -67,7 +69,22 @@ class notasPessoais : AppCompatActivity() {
                     descText.error = getString(R.string.aviso_desc)
                     localText.error = getString(R.string.aviso_local)
                 }
-            } else {
+            }
+
+            else if (message != 0)
+            {
+                val nota = Notas(
+                    id = message,
+                    descric = descText.text.toString(),
+                    local = localText.text.toString(),
+                    data = dataText.text.toString(),
+                    hora = horaText.text.toString())
+                notasViewModel.updateNotas(nota)
+                finish()
+
+            }
+
+            else {
                 replyIntent.putExtra(EXTRA_REPLY_DESCRIC, descText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_DATA, dataText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_HORA, horaText.text.toString())
@@ -78,10 +95,9 @@ class notasPessoais : AppCompatActivity() {
         }
     }
 
-    fun updateNote(view: View){
+    fun Editar(view: View){
 
         var message = intent.getIntExtra(ID, 0)
-        val replyIntent = Intent()
 
         if (TextUtils.isEmpty((descText.text)) || TextUtils.isEmpty((localText.text))) {
 
