@@ -95,37 +95,7 @@ class notasPessoais : AppCompatActivity() {
         }
     }
 
-    fun Editar(view: View){
 
-        var message = intent.getIntExtra(ID, 0)
-
-        if (TextUtils.isEmpty((descText.text)) || TextUtils.isEmpty((localText.text))) {
-
-            if (TextUtils.isEmpty((descText.text)) && !TextUtils.isEmpty((localText.text))) {
-                descText.error = getString(R.string.aviso_desc)
-            }
-            if (!TextUtils.isEmpty((descText.text)) && TextUtils.isEmpty((localText.text))) {
-                localText.error = getString(R.string.aviso_local)
-            }
-            if (TextUtils.isEmpty((descText.text)) && TextUtils.isEmpty((localText.text))) {
-                descText.error = getString(R.string.aviso_desc)
-                localText.error = getString(R.string.aviso_local)
-            }
-        }else {
-            val nota = Notas(
-                id = message,
-                descric = descText.text.toString(),
-                local = localText.text.toString(),
-                data = dataText.text.toString(),
-                hora = horaText.text.toString()
-
-            )
-            notasViewModel.updateNotas(nota)
-            finish()
-        }
-
-
-    }
 
 
 
