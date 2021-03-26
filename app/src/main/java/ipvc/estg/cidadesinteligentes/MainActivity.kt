@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,14 +19,16 @@ import ipvc.estg.cidadesinteligentes.adapters.LOCAL
 import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
-
+import kotlinx.android.synthetic.main.activity_notas_pessoais.*
+import kotlinx.android.synthetic.main.recyclerview_item.*
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var desc: EditText
-    private lateinit var id: EditText
-    private lateinit var local: EditText
+    private lateinit var descText: EditText
+    private lateinit var dataText: TextView
+    private lateinit var horaText: TextView
+    private lateinit var localText: EditText
     private lateinit var notasViewModel: NotasViewModel
     private val newWordActivityRequestCode = 1
 
@@ -39,10 +39,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = notasAdapter(this)
+        val adapter = notasAdapter(this,this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -60,8 +59,17 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, newWordActivityRequestCode)
         }
 
+    }
+
+
+
+    fun delete(id : Int?){
+        notasViewModel.delete(id)
+
 
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -88,14 +96,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun delete(id : Int) {
-        var message = intent.getIntExtra(ID, 0)
-
-        notasViewModel.delete(message)
-    }
-
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -115,6 +115,8 @@ class MainActivity : AppCompatActivity() {
 
         else -> super.onOptionsItemSelected(item)
     }
+
+
     }
 }
 

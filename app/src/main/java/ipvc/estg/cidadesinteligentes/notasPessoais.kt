@@ -34,7 +34,6 @@ class notasPessoais : AppCompatActivity() {
 
         val editLocal = intent.getStringExtra(LOCAL)
         val editDescricao = intent.getStringExtra(DESCRICAO)
-        var message = intent.getStringExtra(ID)
 
         findViewById<EditText>(R.id.add_descricao).setText(editDescricao)
         findViewById<EditText>(R.id.add_localizacao).setText(editLocal)

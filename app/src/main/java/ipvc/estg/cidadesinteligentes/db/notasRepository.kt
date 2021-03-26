@@ -21,7 +21,7 @@ class notasRepository(private val notasDao: notasDao) {
         notasDao.deleteAll()
     }
 
-    suspend fun delete(id: Int){
+    suspend fun delete(id: Int?){
         notasDao.delete(id)
     }
 

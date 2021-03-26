@@ -38,7 +38,7 @@ class NotasViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // delete by notas
-    fun delete(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(id: Int?) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(id)
     }
 
