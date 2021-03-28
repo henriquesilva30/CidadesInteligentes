@@ -7,28 +7,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import ipvc.estg.cidadesinteligentes.adapters.DESCRICAO
-import ipvc.estg.cidadesinteligentes.adapters.ID
-import ipvc.estg.cidadesinteligentes.adapters.LOCAL
 import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
-import kotlinx.android.synthetic.main.activity_notas_pessoais.*
-import kotlinx.android.synthetic.main.recyclerview_item.*
 
 //teste merge
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var descText: EditText
-    private lateinit var dataText: TextView
-    private lateinit var horaText: TextView
-    private lateinit var localText: EditText
+
     private lateinit var notasViewModel: NotasViewModel
     private val newWordActivityRequestCode = 1
 
@@ -88,11 +79,6 @@ class MainActivity : AppCompatActivity() {
                 notasViewModel.insert(notas)
             }
 
-        } else {
-          //  Toast.makeText(
-            //    applicationContext,
-              //  R.string.empty_not_saved,
-                // Toast.LENGTH_LONG).show()
         }
     }
 

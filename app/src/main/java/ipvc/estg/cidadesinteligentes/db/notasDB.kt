@@ -30,8 +30,7 @@ public abstract class notasDB : RoomDatabase() {
                 scope.launch {
                     var notasDao = database.notasDao()
 
-                /*    // Delete all content here.
-                    notasDao.deleteAll()
+                /*
 
                     // Add sample cities.
                     var notas = Notas(1,  "Estudar","20/03/2021","18:16","Rua Eurico Santos nº4")
