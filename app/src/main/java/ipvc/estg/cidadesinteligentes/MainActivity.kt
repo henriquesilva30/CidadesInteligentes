@@ -22,7 +22,7 @@ import ipvc.estg.room.viewModel.NotasViewModel
 import kotlinx.android.synthetic.main.activity_notas_pessoais.*
 import kotlinx.android.synthetic.main.recyclerview_item.*
 
-
+//teste merge
 class MainActivity : AppCompatActivity() {
 
     private lateinit var descText: EditText
