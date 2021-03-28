@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
+//testemerge
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = notasAdapter(this,this)
