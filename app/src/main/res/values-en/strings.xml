@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Cities</string>
+    <string name="add_nota">Add note</string>
+    <string name="empty_not_saved">Unfilled description</string>
+    <string name="descri_o">Description</string>
+    <string name="guardar">Save</string>
+    <string name="localiza_o">"Localization "</string>
+    <string name="aviso_local">Didn\'t fill in the location field</string>
+    <string name="aviso_desc">Didn\'t fill in the description field</string>
+    <string name="aviso_campo">"Didn't fill in the fields "</string>
+</resources>

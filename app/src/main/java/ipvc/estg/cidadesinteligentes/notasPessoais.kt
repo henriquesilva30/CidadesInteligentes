@@ -10,11 +10,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import ipvc.estg.cidadesinteligentes.adapters.DESCRICAO
-import ipvc.estg.cidadesinteligentes.adapters.ID
-import ipvc.estg.cidadesinteligentes.adapters.LOCAL
+import ipvc.estg.cidadesinteligentes.adapters.*
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class notasPessoais : AppCompatActivity() {
@@ -26,17 +26,20 @@ class notasPessoais : AppCompatActivity() {
     private lateinit var notasViewModel: NotasViewModel
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notas_pessoais)
 
         val editLocal = intent.getStringExtra(LOCAL)
         val editDescricao = intent.getStringExtra(DESCRICAO)
+        val getData = intent.getStringExtra(DATA)
+        val getHora = intent.getStringExtra(HORA)
+
 
         findViewById<EditText>(R.id.add_descricao).setText(editDescricao)
         findViewById<EditText>(R.id.add_localizacao).setText(editLocal)
+        findViewById<TextView>(R.id.data).setText(getData)
+        findViewById<TextView>(R.id.hora).setText(getHora)
 
         notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
 
@@ -46,16 +49,14 @@ class notasPessoais : AppCompatActivity() {
         horaText = findViewById(R.id.hora)
 
 
-        //test commit branch
+
 
 
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
 
             var message = intent.getIntExtra(ID, 0)
-
             val replyIntent = Intent()
-
             if(TextUtils.isEmpty((descText.text)) || TextUtils.isEmpty((localText.text))){
 
                 if(TextUtils.isEmpty((descText.text)) && !TextUtils.isEmpty((localText.text))){
@@ -72,6 +73,9 @@ class notasPessoais : AppCompatActivity() {
 
             else if (message != 0)
             {
+
+
+
                 val nota = Notas(
                     id = message,
                     descric = descText.text.toString(),
@@ -84,14 +88,23 @@ class notasPessoais : AppCompatActivity() {
             }
 
             else {
+
+                val CurrentTime: TextView = findViewById(R.id.data)
+                val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm")
+                val currentDateandTime: String = sdf.format(Date())
+                CurrentTime.text = currentDateandTime
+
                 replyIntent.putExtra(EXTRA_REPLY_DESCRIC, descText.text.toString())
-                replyIntent.putExtra(EXTRA_REPLY_DATA, dataText.text.toString())
+                replyIntent.putExtra(EXTRA_REPLY_DATA, CurrentTime.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_HORA, horaText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_LOCAL, localText.text.toString())
                 setResult(Activity.RESULT_OK, replyIntent)
                 finish()
             }
         }
+
+
+
     }
 
 
