@@ -57,7 +57,7 @@ class notasAdapter internal constructor(
        // holder.data.text = current.data
         val id: Int? = current.id
 
-
+        //merge current
         holder.edit.setOnClickListener {
             val context = holder.notasItemView.context
             val titl = holder.local.text.toString()
