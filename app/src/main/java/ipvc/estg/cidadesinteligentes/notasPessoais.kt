@@ -84,7 +84,7 @@ class notasPessoais : AppCompatActivity() {
                 finish()
 
             }
-            //commit1
+            //commit 1
 
             else {
 
