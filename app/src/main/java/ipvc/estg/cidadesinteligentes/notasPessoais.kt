@@ -74,8 +74,6 @@ class notasPessoais : AppCompatActivity() {
             else if (message != 0)
             {
 
-
-
                 val nota = Notas(
                     id = message,
                     descric = descText.text.toString(),
@@ -86,6 +84,7 @@ class notasPessoais : AppCompatActivity() {
                 finish()
 
             }
+            //commit1
 
             else {
 
