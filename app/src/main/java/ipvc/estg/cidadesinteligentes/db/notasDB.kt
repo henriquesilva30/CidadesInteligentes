@@ -50,6 +50,8 @@ public abstract class notasDB : RoomDatabase() {
         }
     }
 
+    //login
+
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.
