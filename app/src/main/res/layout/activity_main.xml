@@ -7,6 +7,15 @@
     android:background="#ffffff"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/sl"
+        android:alpha="0.4"
+        android:scaleType="centerCrop"/>
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"

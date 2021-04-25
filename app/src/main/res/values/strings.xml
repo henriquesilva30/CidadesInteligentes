@@ -8,5 +8,9 @@
     <string name="aviso_local">Não preencheu o campo de localização</string>
     <string name="aviso_desc">Não preencheu o campo de descrição</string>
     <string name="aviso_campo">Não preencheu os campos</string>
+    <string name="notas">Notas</string>
+    <string name="login">Login</string>
+    <string name="utilizador">utilizador</string>
+    <string name="palavra_chave">palavra-chave</string>
 
 </resources>

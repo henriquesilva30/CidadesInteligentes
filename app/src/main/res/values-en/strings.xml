@@ -9,4 +9,8 @@
     <string name="aviso_local">Didn\'t fill in the location field</string>
     <string name="aviso_desc">Didn\'t fill in the description field</string>
     <string name="aviso_campo">"Didn't fill in the fields "</string>
+    <string name="notas">Notas</string>
+    <string name="login">Login</string>
+    <string name="utilizador">utilizador</string>
+    <string name="palavra_chave">palavra-chave</string>
 </resources>
