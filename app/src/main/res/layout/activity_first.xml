@@ -16,14 +16,49 @@
         android:scaleType="centerCrop"/>
 
 <RelativeLayout
-
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
     android:layout_width="300dp"
+    android:layout_marginTop="15dp"
     android:layout_height="wrap_content">
 
-    <EditText
+    <ImageView
         android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/user"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        />
+
+    <ImageView
+        android:layout_marginTop="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@id/user"
+        android:layout_width="2dp"
+        android:layout_height="42dp"
+        android:background="#000000"
+        />
+
+    <ImageView
+        android:layout_marginTop="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/user"
+        android:layout_width="2dp"
+        android:layout_height="42dp"
+        android:background="#000000"
+        />
+
+
+    <ImageView
+        android:layout_marginTop="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        />
+
+    <EditText
         android:background="@color/white"
         android:id="@+id/user"
         android:alpha="0.7"
@@ -31,25 +66,57 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:layout_centerHorizontal="true"
-        android:paddingTop="10dp"
+        android:paddingTop="8dp"
+        android:layout_marginTop="15dp"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="15dp"/>
+        android:gravity="center_horizontal"/>
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/passe"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:background="#000000"/>
+
+    <ImageView
+        android:layout_width="2dp"
+        android:layout_toRightOf="@id/passe"
+        android:layout_marginTop="70dp"
+        android:layout_height="44dp"
+        android:background="#000000"
+        />
+
+    <ImageView
+        android:layout_width="2dp"
+        android:layout_toLeftOf="@id/passe"
+        android:layout_marginTop="70dp"
+        android:layout_height="44dp"
+        android:background="#000000"
+        />
+
+
+    <ImageView
+        android:layout_above="@id/passe"
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:background="#000000"
+        />
 
     <EditText
+        android:layout_marginTop="17dp"
         android:background="#FFFFFF"
         android:id="@+id/passe"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/user"
         android:layout_width="200dp"
         android:alpha="0.7"
-        android:paddingTop="10dp"
+        android:paddingTop="8dp"
         android:layout_height="40dp"
         android:hint="@string/palavra_chave"
         android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="15dp"/>
+        android:gravity="center_horizontal"/>
 
     <CheckBox
         android:id="@+id/checkbox"
@@ -57,6 +124,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:text="Guardar credênciais"/>
 
