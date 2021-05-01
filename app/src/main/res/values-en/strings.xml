@@ -11,6 +11,6 @@
     <string name="aviso_campo">"Didn't fill in the fields "</string>
     <string name="notas">Notas</string>
     <string name="login">Login</string>
-    <string name="utilizador">utilizador</string>
-    <string name="palavra_chave">palavra-chave</string>
+    <string name="utilizador">Utilizador</string>
+    <string name="palavra_chave">Palavra-chave</string>
 </resources>
