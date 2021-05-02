@@ -13,4 +13,9 @@
     <string name="login">Login</string>
     <string name="utilizador">Utilizador</string>
     <string name="palavra_chave">Palavra-chave</string>
+    <string name="emp_pass">Empty field</string>
+    <string name="onShared">sharedon</string>
+    <string name="ofShared">offShared</string>
+    <string name="erro_campos">Wrong data</string>
+    <string name="id">id</string>
 </resources>

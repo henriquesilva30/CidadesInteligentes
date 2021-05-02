@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.estg.cidadesinteligentes.MainActivity
 import ipvc.estg.cidadesinteligentes.R
+import ipvc.estg.cidadesinteligentes.api.nota
 import ipvc.estg.cidadesinteligentes.notasPessoais
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
@@ -39,6 +40,14 @@ class notasAdapter internal constructor(
         val hora: TextView = itemView.findViewById(R.id.hora)
         val edit : LinearLayout = itemView.findViewById(R.id.layoutEdit)
         val delete : ImageView = itemView.findViewById(R.id.Imagedelete)
+
+        fun bind (nota:nota){
+            notasItemView.text = nota.desc
+            local.text = nota.local
+            data.text = nota.data.toString()
+
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotasViewHolder {
@@ -55,7 +64,6 @@ class notasAdapter internal constructor(
         holder.data.text = current.data
         val id: Int? = current.id
 
-        //merge current
         holder.edit.setOnClickListener {
             val context = holder.notasItemView.context
             val local1 = holder.local.text.toString()
@@ -75,8 +83,6 @@ class notasAdapter internal constructor(
         holder.delete.setOnClickListener {
             callbackInterface.delete(current.id)
         }
-
-
 
     }
         internal fun setNotas(notas: List<Notas>) {

@@ -1,16 +1,19 @@
 package ipvc.estg.cidadesinteligentes.api
 
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface EndPoints {
 
-    @GET("/users/")
-    fun getUsers(): Call<List<nota>>
+    @GET("api/users/{id}")
+    fun getUserById(@Path("id") id: Int): Call<user>
 
-    @GET("/users/{id}")
-    fun getUser(@Path("id")id:Int): Call<utilizador>
+    @GET("api/users/")
+    fun getUsers(): Call<List<user>>
 
-
+    @FormUrlEncoded
+    @POST("api/login")
+    fun postLog(@Field("telemovel") telemovel: String, @Field("password") password: String): Call<List<OutputPost>>
 
 }

@@ -48,17 +48,11 @@ class notasPessoais : AppCompatActivity() {
         localText = findViewById(R.id.add_localizacao)
         horaText = findViewById(R.id.hora)
 
-
-
-
-
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
-
             var message = intent.getIntExtra(ID, 0)
             val replyIntent = Intent()
             if(TextUtils.isEmpty((descText.text)) || TextUtils.isEmpty((localText.text))){
-
                 if(TextUtils.isEmpty((descText.text)) && !TextUtils.isEmpty((localText.text))){
                     descText.error = getString(R.string.aviso_desc)
                 }
@@ -73,7 +67,6 @@ class notasPessoais : AppCompatActivity() {
 
             else if (message != 0)
             {
-
                 val nota = Notas(
                     id = message,
                     descric = descText.text.toString(),
@@ -82,17 +75,11 @@ class notasPessoais : AppCompatActivity() {
                     hora = horaText.text.toString())
                 notasViewModel.updateNotas(nota)
                 finish()
-
-            }
-
-
-            else {
-
+            } else {
                 val CurrentTime: TextView = findViewById(R.id.data)
                 val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm")
                 val currentDateandTime: String = sdf.format(Date())
                 CurrentTime.text = currentDateandTime
-
                 replyIntent.putExtra(EXTRA_REPLY_DESCRIC, descText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_DATA, CurrentTime.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_HORA, horaText.text.toString())
@@ -101,15 +88,7 @@ class notasPessoais : AppCompatActivity() {
                 finish()
             }
         }
-
-
-
     }
-
-
-
-
-
     companion object {
         const val EXTRA_REPLY_DESCRIC = "com.example.android.descric"
         const val EXTRA_REPLY_DATA = "com.example.android.data"

@@ -8,9 +8,16 @@
     <string name="aviso_local">Não preencheu o campo de localização</string>
     <string name="aviso_desc">Não preencheu o campo de descrição</string>
     <string name="aviso_campo">Não preencheu os campos</string>
+    <string name="erro_campos">Erro nos campos</string>
     <string name="notas">Notas</string>
     <string name="login">Login</string>
     <string name="utilizador">Utilizador</string>
     <string name="palavra_chave">Palavra-chave</string>
+    <string name="emp_pass">Campo vazio</string>
+    <string name="onShared">sharedon</string>
+    <string name="ofShared">offShared</string>
+    <string name="id">id</string>
+    <string name="nome" translatable="false">nome</string>
+    <string name="tlm" translatable="false">telemovel</string>
 
 </resources>

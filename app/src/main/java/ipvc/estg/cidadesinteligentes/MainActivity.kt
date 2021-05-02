@@ -16,6 +16,7 @@ import ipvc.estg.cidadesinteligentes.adapters.notasAdapter
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
 
+
 //teste merge
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-//testemerg
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = notasAdapter(this,this)
@@ -49,47 +49,32 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, notasPessoais::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
-
     }
-
-
 
     fun delete(id : Int?){
         notasViewModel.delete(id)
-
-
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-
             val pdescric = data?.getStringExtra(notasPessoais.EXTRA_REPLY_DESCRIC)
             val pdata = data?.getStringExtra(notasPessoais.EXTRA_REPLY_DATA)
             val phora = data?.getStringExtra(notasPessoais.EXTRA_REPLY_HORA)
             val plocal = data?.getStringExtra(notasPessoais.EXTRA_REPLY_LOCAL)
 
-
-
             if (pdescric!= null || pdata!=null || phora!=null || plocal !=null ) {
                 val notas = Notas(descric= pdescric!!, data=pdata!! , hora=phora!!, local = plocal!! )
                 notasViewModel.insert(notas)
             }
-
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
         return true
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
@@ -99,10 +84,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-        else -> super.onOptionsItemSelected(item)
-    }
-
-
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 
