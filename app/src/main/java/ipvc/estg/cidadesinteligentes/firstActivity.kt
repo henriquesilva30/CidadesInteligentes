@@ -86,8 +86,8 @@ class firstActivity : AppCompatActivity() {
                 }
             })
         }
-
     }
+    override fun onBackPressed() {             }
 
 }
 

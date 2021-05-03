@@ -20,8 +20,11 @@ data class nota(
     val desc:String,
     val local:String,
     val data:Date,
+    val geo:geo
+)
+
+data class geo(
     val lat: String,
     val lng: String
 )
-
 

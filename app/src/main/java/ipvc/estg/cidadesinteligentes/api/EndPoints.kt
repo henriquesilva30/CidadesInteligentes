@@ -12,6 +12,9 @@ interface EndPoints {
     @GET("api/users/")
     fun getUsers(): Call<List<user>>
 
+    @GET("api/markers/")
+    fun getPontos(): Call<List<nota>>
+
     @FormUrlEncoded
     @POST("api/login")
     fun postLog(@Field("telemovel") telemovel: String, @Field("password") password: String): Call<List<OutputPost>>
