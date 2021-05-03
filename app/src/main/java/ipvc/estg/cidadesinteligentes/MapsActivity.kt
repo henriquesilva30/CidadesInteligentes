@@ -51,7 +51,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getUsers()
         var position: LatLng
-
+//
         call.enqueue(object : Callback<List<user>>{
             override fun onResponse(call: Call<List<user>>, response: Response<List<user>>) {
                 if(response.isSuccessful){
