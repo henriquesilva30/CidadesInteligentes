@@ -8,6 +8,10 @@
 
     </item>
 
+    <item android:id="@+id/nav_notas"
+        android:title="@string/notas"
+        app:showAsAction="ifRoom">
+    </item>
 
 
     <item android:id="@+id/logout"

@@ -15,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_first.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -27,6 +28,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        var id: Any? = null;
+
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.tlm), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            id = sharedPref.all[getString(R.string.tlm)]
+        }
+
+
     }
 
     /**
@@ -62,14 +73,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
                 with(sharedPref.edit()) {
                     putBoolean(getString(R.string.onShared), false)
-                    putString(getString(R.string.tlm), "")
+                    putInt(getString(R.string.tlm), 0)
                     putInt(getString(R.string.id), 0)
                     commit()
                 }
+
                 var intent = Intent(this, firstActivity::class.java)
                 startActivity(intent)
                 true
             }
+
+            R.id.nav_notas -> {
+                val intent = Intent(this,  MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+
             else -> super.onOptionsItemSelected(item)
 
 
