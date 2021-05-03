@@ -94,4 +94,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }
     }
+    override fun onBackPressed() {
+
+    }
 }
