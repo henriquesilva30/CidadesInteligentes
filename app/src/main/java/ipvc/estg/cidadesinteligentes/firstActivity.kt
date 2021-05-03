@@ -24,13 +24,18 @@ class firstActivity : AppCompatActivity() {
         setContentView(R.layout.activity_first)
 
         val sharedPref: SharedPreferences = getSharedPreferences(
-            getString(R.string.ofShared), Context.MODE_PRIVATE
-        )
+            getString(R.string.ofShared), Context.MODE_PRIVATE)
+
         if (sharedPref != null) {
             if (sharedPref.all[getString(R.string.onShared)] == true) {
                 var intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
             }
+          /*  if (sharedPref.all[getString(R.string.ofShared)] == true) {
+                var intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+
+            }*/
         }
 
 //
@@ -48,6 +53,7 @@ class firstActivity : AppCompatActivity() {
         var pass = findViewById<EditText>(R.id.passe)
         val intent = Intent(this, MapsActivity::class.java)
 
+
         if(nr.text.isNullOrEmpty() || pass.text.isNullOrEmpty()){
             if(nr.text.isNullOrEmpty()){
                 nr.error = getString(R.string.emp_pass)
@@ -63,10 +69,8 @@ class firstActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<List<OutputPost>>, response: Response<List<OutputPost>>) {
                     if (response.isSuccessful){
                         for(OutputPost in response.body()!!){
-                            //Shared Preferences Login
                             val sharedPref: SharedPreferences = getSharedPreferences(
-                                getString(R.string.ofShared), Context.MODE_PRIVATE
-                            )
+                                getString(R.string.ofShared), Context.MODE_PRIVATE)
                             with(sharedPref.edit()){
                                 putBoolean(getString(R.string.onShared), true)
                                 putInt(getString(R.string.tlm), OutputPost.telemovel)

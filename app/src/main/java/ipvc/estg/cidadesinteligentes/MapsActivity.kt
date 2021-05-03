@@ -31,10 +31,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var id: Any? = null;
 
         val sharedPref: SharedPreferences = getSharedPreferences(
-            getString(R.string.tlm), Context.MODE_PRIVATE
+            getString(R.string.ofShared), Context.MODE_PRIVATE
         )
         if (sharedPref != null){
-            id = sharedPref.all[getString(R.string.tlm)]
+            id = sharedPref.all[getString(R.string.id)]
         }
 
 
@@ -56,6 +56,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val rua = LatLng(41.698276, -8.8470264)
         mMap.addMarker(MarkerOptions().position(rua).title("Travessia do Socorro"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(rua))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rua,14f))
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -67,10 +69,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.logout -> {
-                //Alterar o Shared Preferences
                 val sharedPref: SharedPreferences = getSharedPreferences(
-                    getString(R.string.ofShared), Context.MODE_PRIVATE
-                )
+                    getString(R.string.ofShared), Context.MODE_PRIVATE)
                 with(sharedPref.edit()) {
                     putBoolean(getString(R.string.onShared), false)
                     putInt(getString(R.string.tlm), 0)
