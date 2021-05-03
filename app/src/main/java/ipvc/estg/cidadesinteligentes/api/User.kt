@@ -19,5 +19,9 @@ data class nota(
     val id_utilizador:user,
     val desc:String,
     val local:String,
-    val data:Date
+    val data:Date,
+    val lat: String,
+    val lng: String
 )
+
+

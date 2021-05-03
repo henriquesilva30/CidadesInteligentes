@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,11 +16,20 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import ipvc.estg.cidadesinteligentes.api.EndPoints
+import ipvc.estg.cidadesinteligentes.api.ServiceBuilder
+import ipvc.estg.cidadesinteligentes.api.nota
+import ipvc.estg.cidadesinteligentes.api.user
 import kotlinx.android.synthetic.main.activity_first.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var notas:List<nota>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
         var id: Any? = null;
 
         val sharedPref: SharedPreferences = getSharedPreferences(
@@ -37,7 +48,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             id = sharedPref.all[getString(R.string.id)]
         }
 
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getUsers()
+        var position: LatLng
 
+        call.enqueue(object : Callback<List<user>>{
+            override fun onResponse(call: Call<List<user>>, response: Response<List<user>>) {
+                if(response.isSuccessful){
+                    for(user in notas){
+                        position = LatLng(user.lat.toString().toDouble(),
+                                            user.lng.toString().toDouble())
+                        mMap.addMarker(MarkerOptions().position(position).title(user.desc + " - "+user.local))
+                    }
+            }
+
+            }
+
+            override fun onFailure(call: Call<List<user>>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity,"${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     /**
@@ -54,7 +84,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val rua = LatLng(41.698276, -8.8470264)
-        mMap.addMarker(MarkerOptions().position(rua).title("Travessia do Socorro"))
+       // mMap.addMarker(MarkerOptions().position(rua).title("estatico"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(rua))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rua,14f))
 
