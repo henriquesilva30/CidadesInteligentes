@@ -18,4 +18,5 @@
     <string name="ofShared">offShared</string>
     <string name="erro_campos">Wrong data</string>
     <string name="id">id</string>
+    <string name="logout">Logout</string>
 </resources>

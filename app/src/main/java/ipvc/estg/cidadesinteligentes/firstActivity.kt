@@ -28,10 +28,8 @@ class firstActivity : AppCompatActivity() {
         )
         if (sharedPref != null) {
             if (sharedPref.all[getString(R.string.onShared)] == true) {
-
-                /*var intent = Intent(this, MapsActivity::class.java)
-               startActivity(intent)*/
-
+                var intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -48,7 +46,7 @@ class firstActivity : AppCompatActivity() {
 
         var nr = findViewById<EditText>(R.id.user)
         var pass = findViewById<EditText>(R.id.passe)
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MapsActivity::class.java)
 
         if(nr.text.isNullOrEmpty() || pass.text.isNullOrEmpty()){
             if(nr.text.isNullOrEmpty()){
@@ -74,7 +72,6 @@ class firstActivity : AppCompatActivity() {
                                 putInt(getString(R.string.tlm), OutputPost.telemovel)
                                 putInt(getString(R.string.id), OutputPost.id)
                                 commit()
-                                Log.d("****SHARED","${OutputPost.id}" )
                             }
                         }
                         startActivity(intent)

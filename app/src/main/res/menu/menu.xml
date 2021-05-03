@@ -8,36 +8,15 @@
 
     </item>
 
-    <item android:id="@+id/todasCidades"
-        android:title="Todas as Cidades"
+
+
+    <item android:id="@+id/logout"
+        android:title="@string/logout"
         app:showAsAction="never">
 
     </item>
-    <item android:id="@+id/getCountryFromAveiro"
-        android:title="Get País de Aveiro"
-        app:showAsAction="never">
 
-    </item>
-    <item android:id="@+id/apagartudo"
-        android:title="Apagar Tudo"
-        app:showAsAction="never">
 
-    </item>
-    <item android:id="@+id/apagarAveiro"
-        android:title="Apagar Aveiro"
-        app:showAsAction="never">
-
-    </item>
-    <item android:id="@+id/alterar"
-        android:title="Alterar"
-        app:showAsAction="never">
-
-    </item>
-    <item android:id="@+id/alteraraveiro"
-        android:title="Alterar Aveiro"
-        app:showAsAction="never">
-
-    </item>
 
 
 </menu>

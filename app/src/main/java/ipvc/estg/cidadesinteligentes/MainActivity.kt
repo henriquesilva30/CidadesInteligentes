@@ -70,23 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        return when (item.itemId) {
-            R.id.apagartudo -> {
-                notasViewModel.deleteAll()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }
 
 

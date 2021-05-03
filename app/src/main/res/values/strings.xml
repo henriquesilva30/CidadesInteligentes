@@ -19,5 +19,6 @@
     <string name="id">id</string>
     <string name="nome" translatable="false">nome</string>
     <string name="tlm" translatable="false">telemovel</string>
+    <string name="logout">Sair</string>
 
 </resources>
