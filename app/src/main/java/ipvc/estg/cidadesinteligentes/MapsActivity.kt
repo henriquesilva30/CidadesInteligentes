@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import ipvc.estg.cidadesinteligentes.api.EndPoints
@@ -29,7 +30,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var pontos: List<Markers>
-    private  var userM: Int? = null
+    private var userM: Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,13 +105,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> super.onOptionsItemSelected(item)
         }
     }
-    override fun onBackPressed() {             }
+
+    override fun onBackPressed() {}
 
     override fun onResume() {
         super.onResume()
 
-        val intent: Bundle?=intent.extras
-        userM=intent?.getInt(firstActivity.userMap)
+        val intent: Bundle? = intent.extras
+        userM = intent?.getInt(firstActivity.userMap)
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getPontos()
         var position: LatLng
@@ -121,17 +123,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     pontos = response.body()!!
 
                     for (ponto in pontos) {
-                        position  = LatLng(
+                        position = LatLng(
                             ponto.lat.toString().toDouble(),
                             ponto.lng.toString().toDouble()
                         )
-                        Log.d("********",position.toString())
-                        mMap.addMarker(
-                            MarkerOptions().position(position).title(ponto.descricao + " - " + ponto.local)
-                        )
+                        if (ponto.id_utilizador == userM) {
+
+                            mMap.addMarker(
+                                MarkerOptions().position(position).title(
+                                    ponto.descricao + " - " +
+                                            ponto.local
+                                ).icon(
+                                    BitmapDescriptorFactory.defaultMarker(
+                                        BitmapDescriptorFactory.HUE_ORANGE
+                                    )
+                                )
+                            )
+                        } else {
+
+                            mMap.addMarker(
+                                MarkerOptions().position(position).title(ponto.descricao + " - " +
+                                        ponto.local).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                            )
+
+                        }
                     }
                 }
             }
+
             override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
                 Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
