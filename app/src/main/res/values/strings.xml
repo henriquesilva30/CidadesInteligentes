@@ -20,5 +20,6 @@
     <string name="nome" translatable="false">nome</string>
     <string name="tlm" translatable="false">telemovel</string>
     <string name="logout">Sair</string>
+    <string name="telem_vel">Telemóvel</string>
 
 </resources>
