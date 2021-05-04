@@ -7,16 +7,16 @@ import retrofit2.http.*
 interface EndPoints {
 
     @GET("api/users/{id}")
-    fun getUserById(@Path("id") id: Int): Call<user>
+    fun getUserById(@Path("id") id: Int): Call<User>
 
     @GET("api/users/")
-    fun getUsers(): Call<List<user>>
+    fun getUsers(): Call<List<User>>
 
     @GET("api/markers/")
-    fun getPontos(): Call<List<nota>>
+    fun getPontos(): Call<List<Markers>>
 
     @FormUrlEncoded
     @POST("api/login")
-    fun postLog(@Field("telemovel") telemovel: String, @Field("password") password: String): Call<List<OutputPost>>
+    fun postLog(@Field("telemovel") telemovel: String, @Field("password") password: String): Call<List<User>>
 
 }

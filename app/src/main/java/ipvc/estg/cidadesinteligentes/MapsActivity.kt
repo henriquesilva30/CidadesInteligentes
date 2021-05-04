@@ -18,8 +18,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import ipvc.estg.cidadesinteligentes.api.EndPoints
 import ipvc.estg.cidadesinteligentes.api.ServiceBuilder
-import ipvc.estg.cidadesinteligentes.api.nota
-import ipvc.estg.cidadesinteligentes.api.user
+import ipvc.estg.cidadesinteligentes.api.Markers
+import ipvc.estg.cidadesinteligentes.api.User
 import kotlinx.android.synthetic.main.activity_first.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +28,7 @@ import retrofit2.Response
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var notas: List<nota>
+    private lateinit var notas: List<Markers>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,21 +52,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val call = request.getPontos()
         var position: LatLng
 //
-        call.enqueue(object : Callback<List<nota>> {
-            override fun onResponse(call: Call<List<nota>>, response: Response<List<nota>>) {
+        call.enqueue(object : Callback<List<Markers>> {
+            override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
                 if (response.isSuccessful) {
-                    for (user in notas) {
+                    for (pontos in notas) {
                         position = LatLng(
-                            user.geo.lat.toString().toDouble(),
-                            user.geo.lng.toString().toDouble()
+                            pontos.lat.toString().toDouble(),
+                            pontos.lng.toString().toDouble()
                         )
                         mMap.addMarker(
-                            MarkerOptions().position(position).title(user.desc + " - " + user.local)
+                            MarkerOptions().position(position).title(pontos.descricao + " - " + pontos.local)
                         )
                     }
                 }
             }
-            override fun onFailure(call: Call<List<nota>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
                 Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

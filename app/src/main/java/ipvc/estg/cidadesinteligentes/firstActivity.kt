@@ -12,6 +12,7 @@ import android.widget.Toast
 import ipvc.estg.cidadesinteligentes.api.EndPoints
 import ipvc.estg.cidadesinteligentes.api.OutputPost
 import ipvc.estg.cidadesinteligentes.api.ServiceBuilder
+import ipvc.estg.cidadesinteligentes.api.User
 import kotlinx.android.synthetic.main.activity_first.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,8 +66,8 @@ class firstActivity : AppCompatActivity() {
         else{
             val request = ServiceBuilder.buildService(EndPoints::class.java)
             val call = request.postLog(nr.text.toString(), pass.text.toString())
-            call.enqueue(object : Callback<List<OutputPost>>{
-                override fun onResponse(call: Call<List<OutputPost>>, response: Response<List<OutputPost>>) {
+            call.enqueue(object : Callback<List<User>>{
+                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                     if (response.isSuccessful){
                         for(OutputPost in response.body()!!){
                             val sharedPref: SharedPreferences = getSharedPreferences(
@@ -81,8 +82,8 @@ class firstActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 }
-                override fun onFailure(call: Call<List<OutputPost>>, t: Throwable) {
-                    Toast.makeText(this@firstActivity, getString(R.string.erro_campos), Toast.LENGTH_SHORT).show()
+                override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                    Toast.makeText(this@firstActivity, t.toString()/*getString(R.string.erro_campos)*/, Toast.LENGTH_SHORT).show()
                 }
             })
         }
