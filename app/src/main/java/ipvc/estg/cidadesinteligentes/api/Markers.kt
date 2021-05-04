@@ -8,7 +8,7 @@ data class Markers(
     val id_utilizador: Int,
     val descricao:String,
     val local:String,
-    val data: Date,
+    val data: String,
     val lat: String,
     val lng: String
 )

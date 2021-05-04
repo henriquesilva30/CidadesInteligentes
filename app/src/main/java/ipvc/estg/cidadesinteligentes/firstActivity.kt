@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import ipvc.estg.cidadesinteligentes.api.EndPoints
-import ipvc.estg.cidadesinteligentes.api.OutputPost
 import ipvc.estg.cidadesinteligentes.api.ServiceBuilder
 import ipvc.estg.cidadesinteligentes.api.User
 import kotlinx.android.synthetic.main.activity_first.*
@@ -24,12 +23,18 @@ class firstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
 
+
+
         val sharedPref: SharedPreferences = getSharedPreferences(
             getString(R.string.ofShared), Context.MODE_PRIVATE)
+
+        val user = sharedPref.getInt(getString(R.string.id),0)
 
         if (sharedPref != null) {
             if (sharedPref.all[getString(R.string.onShared)] == true) {
                 var intent = Intent(this, MapsActivity::class.java)
+                intent.putExtra(userMap,user)
+
                 startActivity(intent)
             }
           /*  if (sharedPref.all[getString(R.string.ofShared)] == true) {
@@ -89,6 +94,10 @@ class firstActivity : AppCompatActivity() {
         }
     }
     override fun onBackPressed() {             }
+    companion object {
+        const val userMap = "com.example.android.usermap"
+
+    }
 
 }
 

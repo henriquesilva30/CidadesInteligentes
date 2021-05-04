@@ -5,9 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,8 +21,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import ipvc.estg.cidadesinteligentes.api.EndPoints
 import ipvc.estg.cidadesinteligentes.api.ServiceBuilder
 import ipvc.estg.cidadesinteligentes.api.Markers
-import ipvc.estg.cidadesinteligentes.api.User
-import kotlinx.android.synthetic.main.activity_first.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +28,8 @@ import retrofit2.Response
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var notas: List<Markers>
+    private lateinit var pontos: List<Markers>
+    private  var userM: Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,28 +49,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             id = sharedPref.all[getString(R.string.id)]
         }
 
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getPontos()
-        var position: LatLng
-//
-        call.enqueue(object : Callback<List<Markers>> {
-            override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
-                if (response.isSuccessful) {
-                    for (pontos in notas) {
-                        position = LatLng(
-                            pontos.lat.toString().toDouble(),
-                            pontos.lng.toString().toDouble()
-                        )
-                        mMap.addMarker(
-                            MarkerOptions().position(position).title(pontos.descricao + " - " + pontos.local)
-                        )
-                    }
-                }
-            }
-            override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
-                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     /**
@@ -127,4 +106,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     override fun onBackPressed() {             }
 
+    override fun onResume() {
+        super.onResume()
+
+        val intent: Bundle?=intent.extras
+        userM=intent?.getInt(firstActivity.userMap)
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getPontos()
+        var position: LatLng
+//
+        call.enqueue(object : Callback<List<Markers>> {
+            override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+                if (response.isSuccessful) {
+                    pontos = response.body()!!
+
+                    for (ponto in pontos) {
+                        position  = LatLng(
+                            ponto.lat.toString().toDouble(),
+                            ponto.lng.toString().toDouble()
+                        )
+                        Log.d("********",position.toString())
+                        mMap.addMarker(
+                            MarkerOptions().position(position).title(ponto.descricao + " - " + ponto.local)
+                        )
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
+    }
+
 }
+
