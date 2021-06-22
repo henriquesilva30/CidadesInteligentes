@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ipvc.estg.cidadesinteligentes.MainActivity
 import ipvc.estg.cidadesinteligentes.R
-import ipvc.estg.cidadesinteligentes.api.nota
+import ipvc.estg.cidadesinteligentes.api.Markers
 import ipvc.estg.cidadesinteligentes.notasPessoais
 import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
@@ -41,8 +41,8 @@ class notasAdapter internal constructor(
         val edit : LinearLayout = itemView.findViewById(R.id.layoutEdit)
         val delete : ImageView = itemView.findViewById(R.id.Imagedelete)
 
-        fun bind (nota:nota){
-            notasItemView.text = nota.desc
+        fun bind (nota:Markers){
+            notasItemView.text = nota.descricao
             local.text = nota.local
             data.text = nota.data.toString()
 
