@@ -1,5 +1,6 @@
 package ipvc.estg.cidadesinteligentes.api
 
+import java.sql.Timestamp
 import java.util.*
 
 data class Markers(
@@ -10,7 +11,9 @@ data class Markers(
     val local:String,
     val data: String,
     val lat: String,
-    val lng: String
+    val lng: String,
+    val img: String,
+    val timestamp: String
 )
 
 

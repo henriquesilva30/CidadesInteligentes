@@ -17,7 +17,6 @@ import ipvc.estg.room.entities.Notas
 import ipvc.estg.room.viewModel.NotasViewModel
 
 
-//teste merge
 class MainActivity : AppCompatActivity() {
 
 

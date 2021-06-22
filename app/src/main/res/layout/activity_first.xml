@@ -121,17 +121,15 @@
         android:gravity="center_horizontal"/>
 
 
-
     <Button
         android:id="@+id/login"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/passe"
-        android:layout_centerHorizontal="true"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:text="@string/login"
+        android:layout_below="@+id/passe"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:onClick="login"
-        android:layout_marginBottom="15dp"/>
+        android:text="@string/login" />
 
     <Button
         android:id="@+id/notas"

@@ -20,4 +20,5 @@
     <string name="id">id</string>
     <string name="logout">Logout</string>
     <string name="telem_vel">Phone</string>
+    <string name="data">Data</string>
 </resources>

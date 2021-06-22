@@ -37,11 +37,10 @@ class firstActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
-          /*  if (sharedPref.all[getString(R.string.ofShared)] == true) {
-                var intent = Intent(this, MapsActivity::class.java)
-                startActivity(intent)
-
-            }*/
+            /*  if (sharedPref.all[getString(R.string.ofShared)] == true) {
+                  var intent = Intent(this, MapsActivity::class.java)
+                  startActivity(intent)
+              }*/
         }
 
 //
@@ -88,7 +87,7 @@ class firstActivity : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                    Toast.makeText(this@firstActivity, t.toString()/*getString(R.string.erro_campos)*/, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@firstActivity, getString(R.string.erro_campos), Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -100,5 +99,3 @@ class firstActivity : AppCompatActivity() {
     }
 
 }
-
-

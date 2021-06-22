@@ -21,5 +21,11 @@
     <string name="tlm" translatable="false">telemovel</string>
     <string name="logout">Sair</string>
     <string name="telem_vel">Telemóvel</string>
+    <string name="data">Data</string>
+    <string name="pontoDesc" translatable="false">pontoDesc</string>
+    <string name="pontoTipo" translatable="false">pontoTipo</string>
+    <string name="pontoLatlng" translatable="false">pontoLatlng</string>
+    <string name="pontoImg" translatable="false">pontoImg</string>
+    <string name="tipo_de_marca" translatable="false">Tipo de marca</string>
 
 </resources>

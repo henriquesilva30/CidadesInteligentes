@@ -6,5 +6,6 @@
     <color name="buttonLabel">#FFFFFF</color>
     <color name="silverBK">#C0C0C0</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
 </resources>
