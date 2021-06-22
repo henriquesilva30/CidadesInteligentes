@@ -27,5 +27,6 @@
     <string name="pontoLatlng" translatable="false">pontoLatlng</string>
     <string name="pontoImg" translatable="false">pontoImg</string>
     <string name="tipo_de_marca" translatable="false">Tipo de marca</string>
+    <string name="adicionarmarco">Adicionar Marco</string>
 
 </resources>
