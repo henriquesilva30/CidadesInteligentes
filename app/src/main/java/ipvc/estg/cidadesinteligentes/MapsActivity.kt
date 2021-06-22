@@ -79,7 +79,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getPontos()
         var position: LatLng
-//
+
         call.enqueue(object : Callback<List<Markers>> {
             override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
                 if (response.isSuccessful) {
