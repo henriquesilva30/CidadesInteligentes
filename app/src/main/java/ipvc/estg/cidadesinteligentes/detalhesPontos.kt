@@ -36,15 +36,12 @@ class detalhesPontos : AppCompatActivity() {
     private lateinit var popupLatlng: String
     private lateinit var popupData: String
     private var idlogin: Int = 0
-    private var iduserreport: Int = 0
     private val CLIENT_ID = "ae8b97176cae1d4"
     private lateinit var imgPonto: ImageView
     private lateinit var descPonto: TextView
     private lateinit var tipoPonto: TextView
     private lateinit var dataPonto: TextView
     private lateinit var LatlngPonto: TextView
-    private lateinit var btPost: Button
-    private lateinit var btDel: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

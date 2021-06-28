@@ -13,13 +13,14 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity" />
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-android:id="@+id/addmarco"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_margin="35dp"
-android:contentDescription="@string/adicionarmarco"
-android:src="@drawable/ic_baseline_add_24"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addmarco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="60dp"
+        android:contentDescription="@string/adicionarmarco"
+        android:src="@drawable/ic_baseline_add_24" />
 </RelativeLayout>

@@ -1,10 +1,13 @@
 package ipvc.estg.cidadesinteligentes
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
@@ -14,7 +17,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -50,12 +56,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var userM: Int? = null
     private var pontoID: String = ""
     private lateinit var latLng: TextView
-    private  var pontoImgTxt: String = ""
+    private var pontoImgTxt: String = ""
     private lateinit var pontoImg: ImageView
-    private  var pontoData: String=""
+    private var pontoData: String = ""
     private lateinit var pontoDesc: TextView
     private lateinit var pontoTipo: TextView
     private var linkImg: String = ""
+    private lateinit var lastlocation: Location
+    private lateinit var fusedlocationClient: FusedLocationProviderClient
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +75,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        var id: Any? = null;
+        var id: Any? = null
+
+        fusedlocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val sharedPref: SharedPreferences = getSharedPreferences(
             getString(R.string.ofShared), Context.MODE_PRIVATE
@@ -122,10 +132,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                     pontoImg =
                                         v.findViewById<View>(R.id.imgdetalhes) as ImageView
                                     pontoID = arg0.title.substringBefore(" -")
-                                    pontoImgTxt = arg0.title.substringBefore(" -"  )
+                                    pontoImgTxt = arg0.title.substringBefore(" -")
 
 
-                                    Glide.with(this@MapsActivity).load(arg0.title.substringBefore(" -"  )).into(pontoImg)
+                                    Glide.with(this@MapsActivity)
+                                        .load(arg0.title.substringBefore(" -")).into(pontoImg)
 
 
                                 } catch (ev: Exception) {
@@ -138,9 +149,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         if (ponto.id_utilizador == userM) {
 
                             mMap.addMarker(
-                                MarkerOptions().position(position).title(""+ponto.img+" - "+
-                                        ponto.descricao
-                                ).snippet(""+ponto.id_tipo_nota).icon(
+                                MarkerOptions().position(position).title(
+                                    "" + ponto.img + " - " +
+                                            ponto.descricao
+                                ).snippet("" + ponto.id_tipo_nota).icon(
                                     BitmapDescriptorFactory.defaultMarker(
                                         BitmapDescriptorFactory.HUE_ORANGE
                                     )
@@ -149,9 +161,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         } else {
 
                             mMap.addMarker(
-                                MarkerOptions().position(position).title(""+ponto.img+" - "+
-                                        ponto.descricao
-                                ).snippet(""+ponto.id_tipo_nota).icon(
+                                MarkerOptions().position(position).title(
+                                    "" + ponto.img + " - " +
+                                            ponto.descricao
+                                ).snippet("" + ponto.id_tipo_nota).icon(
                                     BitmapDescriptorFactory.defaultMarker(
                                         BitmapDescriptorFactory.HUE_YELLOW
                                     )
@@ -162,7 +175,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         mMap.setOnInfoWindowClickListener() {
                             val datelhesPonto =
                                 Intent(this@MapsActivity, detalhesPontos::class.java)
-                            datelhesPonto.putExtra(imgTxt, pontoImgTxt )
+                            datelhesPonto.putExtra(imgTxt, pontoImgTxt)
                             datelhesPonto.putExtra(idUser, userM)
                             datelhesPonto.putExtra(idPonto, pontoID)
                             datelhesPonto.putExtra(idUserponto, ponto.id)
@@ -186,6 +199,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
 
 
+        val adicionarMarca = findViewById<FloatingActionButton>(R.id.addmarco)
+
+        adicionarMarca.setOnClickListener {
+            val intent = Intent(this@MapsActivity, PontoActivity::class.java)
+            intent.putExtra(userMap, userM)
+            startActivity(intent)
+        }
+
+
     }
 
     /**
@@ -200,12 +222,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         // Add a marker in Sydney and move the camera
-        val rua = LatLng(41.698276, -8.8470264)
+        //val rua = LatLng(41.698276, -8.8470264)
         // mMap.addMarker(MarkerOptions().position(rua).title("estatico"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(rua))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rua, 14f))
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(rua))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rua, 14f))
+        setUpMap()
 
+    }
 
+    fun setUpMap() {
+        if (ActivityCompat.checkSelfPermission(
+                this@MapsActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this@MapsActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1000
+            )
+            return
+        }else {
+            mMap.isMyLocationEnabled = true
+
+            fusedlocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastlocation = location
+                    Toast.makeText(this@MapsActivity, lastlocation.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -251,7 +299,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+
     companion object {
+        const val userMap = "com.example.android.usermap"
         const val idUser = "com.example.android.iduser"
         const val imgTxt = "com.example.android.imgTxt"
         const val idPonto = "com.example.android.idponto"
