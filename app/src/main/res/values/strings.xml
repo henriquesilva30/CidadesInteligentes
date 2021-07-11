@@ -28,5 +28,14 @@
     <string name="pontoImg" translatable="false">pontoImg</string>
     <string name="tipo_de_marca" translatable="false">Tipo de marca</string>
     <string name="adicionarmarco">Adicionar Marco</string>
+    <string name="carregar_foto">Carregar foto</string>
+    <string name="galeria">Galeria</string>
+    <string name="descri_o_do_ponto">Descrição do ponto</string>
+    <string name="categoria_do_ponto">Categoria do ponto</string>
+    <string name="acidente">Acidente</string>
+    <string name="obras">Obras</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="submeter">Submeter</string>
+    <string name="municipio">Municipio</string>
 
 </resources>

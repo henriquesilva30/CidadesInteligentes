@@ -10,8 +10,8 @@ data class Markers(
     val descricao:String,
     val local:String,
     val data: String,
-    val lat: String,
-    val lng: String,
+    val lat: Double,
+    val lng: Double,
     val img: String,
     val timestamp: String
 )

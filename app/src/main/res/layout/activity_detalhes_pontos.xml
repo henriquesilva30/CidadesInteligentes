@@ -1,89 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
     tools:context=".detalhesPontos">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/lat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Latitude : "
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/img"
+        app:layout_constraintTop_toTopOf="@+id/dataPonto" />
 
 
-            <TextView
-                android:id="@+id/lat"
-                android:layout_alignParentStart="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Latitude : "/>
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="1.4in"
+        android:layout_below="@+id/lat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:text="Imagem"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/t_a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lat" />
 
-            <TextView
-                android:id="@+id/lat2"
-                android:layout_toRightOf="@id/lat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_marginLeft="5dp"
-                android:text=""/>
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t_a"
+        android:layout_marginTop="32dp"
+        android:text="Adicionar descrição"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/t_a"
+        app:layout_constraintTop_toBottomOf="@+id/t_a" />
 
-            <ImageView
-                android:id="@+id/img"
-                android:layout_below="@+id/lat"
-                android:layout_centerHorizontal="true"
-                android:layout_width="match_parent"
-                android:layout_height="1.4in"
-                android:textColor="@color/black"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:text="Imagem"/>
-
-
-            <TextView
-            android:layout_margin="20dp"
-            android:id="@+id/desc"
-            android:layout_below="@+id/t_a"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Adicionar descrição"/>
-
-        <TextView
-            android:id="@+id/t_a"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img"
-            android:layout_alignStart="@id/desc"
-            android:textColor="@color/black"
-            android:text="Tipo de alerta: "/>
-
-            <TextView
-                android:id="@+id/t_a2"
-                android:layout_toRightOf="@id/t_a"
-                android:layout_below="@id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_marginLeft="5dp"
-                android:text=""/>
-
-            <TextView
-                android:id="@+id/dataPonto"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/img"
-                android:layout_alignBottom="@id/t_a"
-                android:layout_marginRight="20dp"
-                android:text="@string/data"/>
-
-        </RelativeLayout>
+    <TextView
+        android:id="@+id/t_a"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_alignStart="@id/desc"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Tipo de alerta: "
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/img"
+        app:layout_constraintTop_toBottomOf="@+id/img" />
 
 
+    <TextView
+        android:id="@+id/t_a2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_alignStart="@id/desc"
+        android:layout_marginStart="16dp"
+        android:text="Obras"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/t_a"
+        app:layout_constraintStart_toEndOf="@+id/t_a" />
+
+    <TextView
+        android:id="@+id/dataPonto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_alignBottom="@id/t_a"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/data"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/img"
+        app:layout_constraintEnd_toEndOf="@+id/img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="Editar"
+        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/img" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="32dp"
+        android:text="Eliminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/desc"
+        app:layout_constraintTop_toBottomOf="@+id/desc" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

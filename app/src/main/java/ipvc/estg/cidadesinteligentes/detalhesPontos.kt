@@ -9,12 +9,18 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
+import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import ipvc.estg.cidadesinteligentes.api.EndPoints
+import ipvc.estg.cidadesinteligentes.api.Markers
+import ipvc.estg.cidadesinteligentes.api.ServiceBuilder
 import kotlinx.android.synthetic.main.activity_detalhes_pontos.*
 import kotlinx.android.synthetic.main.custom_info_window.*
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +29,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import org.json.JSONTokener
+import retrofit2.Call
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.OutputStreamWriter
 import java.net.URL
@@ -30,18 +38,21 @@ import javax.net.ssl.HttpsURLConnection
 
 class detalhesPontos : AppCompatActivity() {
 
-    private lateinit var idPonto: String
     private lateinit var popupDesc: String
     private lateinit var popupTipo: String
     private lateinit var popupLatlng: String
     private lateinit var popupData: String
+    private var idPonto: Int = 0
     private var idlogin: Int = 0
+    private var rPonto: Int = 0
     private val CLIENT_ID = "ae8b97176cae1d4"
     private lateinit var imgPonto: ImageView
     private lateinit var descPonto: TextView
     private lateinit var tipoPonto: TextView
     private lateinit var dataPonto: TextView
     private lateinit var LatlngPonto: TextView
+    private lateinit var delete: Button
+    private lateinit var update: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +66,9 @@ class detalhesPontos : AppCompatActivity() {
         dataPonto = findViewById(R.id.dataPonto)
 
         val pontoSelec: Bundle? = intent.extras
-        idPonto = pontoSelec?.getString(MapsActivity.idPonto).toString()
+        delete = findViewById(R.id.button2)
+        update = findViewById(R.id.button3)
+        idPonto = pontoSelec?.getInt(MapsActivity.idPonto)!!
         popupDesc =
             pontoSelec?.getString(MapsActivity.descPonto).toString()
         popupTipo = pontoSelec?.getString(MapsActivity.categoriaPonto).toString()
@@ -72,8 +85,31 @@ class detalhesPontos : AppCompatActivity() {
         Glide.with(this@detalhesPontos).load(pontoSelec?.getString(MapsActivity.imgTxt))
             .into(imgPonto)
 
-    }
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getPonto(idPonto)
 
+        call.enqueue(object : retrofit2.Callback<Markers> {
+            override fun onResponse(call: Call<Markers>, response: Response<Markers>) {
+                val ponto: Markers = response.body()!!
+                rPonto = ponto.id_utilizador
+
+                if(idlogin == rPonto){
+                    delete.visibility = View.VISIBLE
+                    update.visibility = View.VISIBLE
+                }else{
+                    delete.visibility =  View.INVISIBLE
+                    update.visibility =  View.INVISIBLE
+                }
+            }
+
+            override fun onFailure(call: Call<Markers>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+
+
+        })
+    }
     private fun uploadImageToImgur(image: Bitmap) {
         getBase64Image(image, complete = { base64Image ->
             GlobalScope.launch(Dispatchers.Default) {

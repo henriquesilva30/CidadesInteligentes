@@ -21,4 +21,14 @@
     <string name="logout">Logout</string>
     <string name="telem_vel">Phone</string>
     <string name="data">Data</string>
+    <string name="adicionarmarco">Increase narker</string>
+    <string name="carregar_foto">Load photo</string>
+    <string name="descri_o_do_ponto">Text about marker</string>
+    <string name="categoria_do_ponto">Type marker</string>
+    <string name="submeter">Submit</string>
+    <string name="cancelar">Back</string>
+    <string name="acidente">Accident</string>
+    <string name="obras">Construction</string>
+    <string name="municipio">County</string>
+    <string name="galeria">"Gallery "</string>
 </resources>

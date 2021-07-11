@@ -1,3 +1,4 @@
+
 package ipvc.estg.cidadesinteligentes
 
 import android.Manifest
@@ -85,6 +86,104 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (sharedPref != null) {
             id = sharedPref.all[getString(R.string.id)]
         }
+
+
+        val adicionarMarca = findViewById<FloatingActionButton>(R.id.addmarco)
+
+        adicionarMarca.setOnClickListener {
+            val intent = Intent(this@MapsActivity, PontoActivity::class.java)
+            intent.putExtra(userMap, userM)
+            startActivity(intent)
+        }
+
+
+    }
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        // Add a marker in Sydney and move the camera
+        //val rua = LatLng(41.698276, -8.8470264)
+        // mMap.addMarker(MarkerOptions().position(rua).title("estatico"))
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(rua))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rua, 14f))
+        setUpMap()
+
+    }
+
+    fun setUpMap() {
+        if (ActivityCompat.checkSelfPermission(
+                this@MapsActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this@MapsActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1000
+            )
+            return
+        }else {
+            mMap.isMyLocationEnabled = true
+
+            fusedlocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastlocation = location
+                    Toast.makeText(this@MapsActivity, userM.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
+                }
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.logout -> {
+                val sharedPref: SharedPreferences = getSharedPreferences(
+                    getString(R.string.ofShared), Context.MODE_PRIVATE
+                )
+                with(sharedPref.edit()) {
+                    putBoolean(getString(R.string.onShared), false)
+                    putInt(getString(R.string.tlm), 0)
+                    putInt(getString(R.string.id), 0)
+                    commit()
+                }
+
+                var intent = Intent(this, firstActivity::class.java)
+                startActivity(intent)
+                true
+            }
+
+            R.id.nav_notas -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    override fun onBackPressed() {}
+
+    override fun onResume() {
+        super.onResume()
 
         val intent: Bundle? = intent.extras
         userM = intent?.getInt(firstActivity.userMap)
@@ -199,104 +298,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         })
 
 
-        val adicionarMarca = findViewById<FloatingActionButton>(R.id.addmarco)
-
-        adicionarMarca.setOnClickListener {
-            val intent = Intent(this@MapsActivity, PontoActivity::class.java)
-            intent.putExtra(userMap, userM)
-            startActivity(intent)
-        }
-
-
-    }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        // Add a marker in Sydney and move the camera
-        //val rua = LatLng(41.698276, -8.8470264)
-        // mMap.addMarker(MarkerOptions().position(rua).title("estatico"))
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(rua))
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rua, 14f))
-        setUpMap()
-
-    }
-
-    fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(
-                this@MapsActivity,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this@MapsActivity,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1000
-            )
-            return
-        }else {
-            mMap.isMyLocationEnabled = true
-
-            fusedlocationClient.lastLocation.addOnSuccessListener(this) { location ->
-                if (location != null) {
-                    lastlocation = location
-                    Toast.makeText(this@MapsActivity, lastlocation.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                    val currentLatLng = LatLng(location.latitude, location.longitude)
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
-                }
-            }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.logout -> {
-                val sharedPref: SharedPreferences = getSharedPreferences(
-                    getString(R.string.ofShared), Context.MODE_PRIVATE
-                )
-                with(sharedPref.edit()) {
-                    putBoolean(getString(R.string.onShared), false)
-                    putInt(getString(R.string.tlm), 0)
-                    putInt(getString(R.string.id), 0)
-                    commit()
-                }
-
-                var intent = Intent(this, firstActivity::class.java)
-                startActivity(intent)
-                true
-            }
-
-            R.id.nav_notas -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-
-    override fun onBackPressed() {}
-
-    override fun onResume() {
-        super.onResume()
-
-
     }
 
 
@@ -313,4 +314,3 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 }
-
