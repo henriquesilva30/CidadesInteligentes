@@ -278,6 +278,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             datelhesPonto.putExtra(idUser, userM)
                             datelhesPonto.putExtra(idPonto, pontoID)
                             datelhesPonto.putExtra(idUserponto, ponto.id)
+                            datelhesPonto.putExtra(UserPonto, ponto.id_utilizador)
                             datelhesPonto.putExtra(dataPonto, ponto.data)
                             datelhesPonto.putExtra(descPonto, pontoDesc.text.toString())
                             datelhesPonto.putExtra(
@@ -310,6 +311,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         const val latlng = "com.example.android.latlng"
         const val descPonto = "com.example.android.descponto"
         const val dataPonto = "com.example.android.dataPonto"
+        const val UserPonto = "com.example.android.UserPonto"
         const val categoriaPonto = "com.example.android.categoriaponto"
     }
 

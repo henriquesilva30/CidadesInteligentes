@@ -20,6 +20,11 @@ interface EndPoints {
         @Path("id") id: Int
     ): Call<Markers>
 
+    @DELETE("api/marker/{id}")
+    fun deletePonto(
+        @Path("id") id: Int
+    ): Call<Markers>
+
     @Multipart
     @POST("api/marker")
     fun addPonto(

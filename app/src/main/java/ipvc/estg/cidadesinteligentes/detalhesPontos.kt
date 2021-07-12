@@ -44,6 +44,7 @@ class detalhesPontos : AppCompatActivity() {
     private lateinit var popupData: String
     private var idPonto: Int = 0
     private var idlogin: Int = 0
+    private var utilizadorponto: Int = 0
     private var rPonto: Int = 0
     private val CLIENT_ID = "ae8b97176cae1d4"
     private lateinit var imgPonto: ImageView
@@ -68,7 +69,8 @@ class detalhesPontos : AppCompatActivity() {
         val pontoSelec: Bundle? = intent.extras
         delete = findViewById(R.id.button2)
         update = findViewById(R.id.button3)
-        idPonto = pontoSelec?.getInt(MapsActivity.idPonto)!!
+        idPonto = pontoSelec?.getInt(MapsActivity.idUserponto)!!
+        utilizadorponto = pontoSelec?.getInt(MapsActivity.UserPonto)!!
         popupDesc =
             pontoSelec?.getString(MapsActivity.descPonto).toString()
         popupTipo = pontoSelec?.getString(MapsActivity.categoriaPonto).toString()
@@ -85,21 +87,24 @@ class detalhesPontos : AppCompatActivity() {
         Glide.with(this@detalhesPontos).load(pontoSelec?.getString(MapsActivity.imgTxt))
             .into(imgPonto)
 
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getPonto(idPonto)
+        if(idlogin == utilizadorponto){
+            delete.visibility = View.VISIBLE
+            update.visibility = View.VISIBLE
+        }else{
+            delete.visibility =  View.INVISIBLE
+            update.visibility =  View.INVISIBLE
+        }
 
-        call.enqueue(object : retrofit2.Callback<Markers> {
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+      //  val call = request.getPonto(idPonto)
+
+     /*   call.enqueue(object : retrofit2.Callback<Markers> {
             override fun onResponse(call: Call<Markers>, response: Response<Markers>) {
                 val ponto: Markers = response.body()!!
                 rPonto = ponto.id_utilizador
 
-                if(idlogin == rPonto){
-                    delete.visibility = View.VISIBLE
-                    update.visibility = View.VISIBLE
-                }else{
-                    delete.visibility =  View.INVISIBLE
-                    update.visibility =  View.INVISIBLE
-                }
+
             }
 
             override fun onFailure(call: Call<Markers>, t: Throwable) {
@@ -108,8 +113,9 @@ class detalhesPontos : AppCompatActivity() {
 
 
 
-        })
+        })*/
     }
+
     private fun uploadImageToImgur(image: Bitmap) {
         getBase64Image(image, complete = { base64Image ->
             GlobalScope.launch(Dispatchers.Default) {
